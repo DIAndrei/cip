@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { ChartComponent } from './util/chart.component';
+import { LineChartComponent } from './lineChart.component';
+import { ChartService } from './util/chart.service';
 
 import { AppComponent } from './app.component';
 
@@ -17,8 +20,10 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
+    ChartComponent,
+    LineChartComponent
   ],
-  providers: [ ],
+  providers: [ChartService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
