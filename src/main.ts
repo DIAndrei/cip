@@ -2,7 +2,6 @@ import * as express from 'express';
 import * as mongoose from 'mongoose';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-// import * as morgan from 'morgan';
 
 const port: number = process.env.PORT || 3000;
 const app = express();
@@ -17,7 +16,6 @@ const app = express();
 })();
 
 app.use(bodyParser.json());
-// app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, './client')));

@@ -3,6 +3,7 @@ import {ChartComponent } from './util/chart.component';
 import { LineChartComponent } from './lineChart.component';
 
 @Component({
+  
   selector: 'my-app',
   template: `
     <h1>{{title}}</h1>
