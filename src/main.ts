@@ -21,6 +21,7 @@ app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, './client')));
 
 app.use(require('./server/routes/lineData.routes'));
+app.use(require('./server/routes/barData.routes'));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/index.html'));
