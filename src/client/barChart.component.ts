@@ -30,14 +30,14 @@ export class BarChartComponent implements OnInit {
 
     getData() {
         this._barChartService.getBarData().subscribe(
-            (data: IBarData[]) => {
+            data => {
                 this.data = data;
-                // this.initSvg();
-                // this.initAxis();
-                // this.drawAxis();
-                // this.drawBars();
+                this.initSvg();
+                this.initAxis();
+                this.drawAxis();
+                this.drawBars();
             },
-            (err: any) => console.error(err)
+            err => console.error(err)
         );
     }
 

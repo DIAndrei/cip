@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { Http } from '@angular/http';
 import { Observable } from "rxjs/Observable";
+import 'rxjs/add/operator/map';
 import { IBarData } from '../server/types/IBarData';
 
 @Injectable()
 export class BarChartService {
-    private barUrl: '/api/data/bar';
+    private barUrl = '/api/data/bar/';
 
     constructor(
         private _http: Http
