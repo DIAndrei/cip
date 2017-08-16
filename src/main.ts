@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, './client')));
 
-app.use(require('./server/routes/data.routes'));
+app.use(require('./server/routes/lineData.routes'));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/index.html'));

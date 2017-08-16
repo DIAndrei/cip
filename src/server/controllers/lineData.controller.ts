@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DataModel as Data } from '../models/data';
+import { DataModel as Data } from '../models/lineData';
 
 export class DataController {
     constructor() { }
