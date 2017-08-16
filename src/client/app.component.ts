@@ -8,7 +8,7 @@ import { LineChartComponent } from './lineChart.component';
   template: `
     <h1>{{title}}</h1>
     <chart> </chart>
-    <line-chart> </line-chart>
+    <pie-chart> </pie-chart>
   `,
 })
 export class AppComponent {
