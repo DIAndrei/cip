@@ -7,7 +7,7 @@ import { STATISTICS } from './dataBar';
 @Component({
     moduleId: module.id,
     selector: 'bar-chart',
-    templateUrl: './barChart.html',
+    templateUrl: './lineChart.html',
     styleUrls: ['barChart.component.css']
 })
 export class BarChartComponent implements OnInit {
