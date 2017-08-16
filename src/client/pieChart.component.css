@@ -1,0 +1,8 @@
+:host >>> .arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+:host >>> .arc path {
+  stroke: #fff;
+}
