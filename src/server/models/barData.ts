@@ -1,15 +1,13 @@
 import * as mongoose from 'mongoose';
-
+import { IBarData } from '../types/IBarData';
 const Schema = mongoose.Schema;
 
-export interface BarDataDocument extends mongoose.Document {
-    _id: string,
-    attr: string,
-    value: number
+export interface BarDataDocument extends mongoose.Document, IBarData {
+    _id: string
 }
 
 const BarDataSchema = new Schema({
-    attr: {
+    prop: {
         type: String,
         required: true
     },
