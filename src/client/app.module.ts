@@ -8,10 +8,9 @@ import { ChartService } from './util/chart.service';
 
 import { LineChartComponent } from './lineChart.component';
 import { PieChartComponent } from './pieChart.component';
+import { BarChartComponent } from './barChart.component';
 
 import { AppComponent } from './app.component';
-
-
 
 // import { AppRoutingModule } from './app-routing.module';
 
@@ -26,9 +25,10 @@ import { AppComponent } from './app.component';
     AppComponent,
     ChartComponent,
     LineChartComponent,
-    PieChartComponent
+    PieChartComponent,
+    BarChartComponent
   ],
-  providers: [ChartService ],
-  bootstrap: [ AppComponent ]
+  providers: [ChartService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
