@@ -1,0 +1,13 @@
+:host >>> .bar {
+    fill: steelblue;
+}
+
+:host >>> .bar:hover {
+    fill: brown;
+}
+
+:host >>> .axis-title {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.5px;
+}
