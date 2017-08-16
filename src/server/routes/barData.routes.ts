@@ -18,7 +18,7 @@ router.post('/api/data/bar', async (req: express.Request, res: express.Response)
     try {
         let _value = new Date().getTime() % 1000;
         await barDataCtrl.postData({
-            attr: makeDummyWord(),
+            prop: makeDummyWord(),
             value: _value
         });
         res.status(200).end();
