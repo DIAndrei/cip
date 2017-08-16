@@ -21,7 +21,7 @@ gulp.task('watch', ['scripts'], () => {
 });
 
 gulp.task('copy', () => {
-    return gulp.src('src/**/*.+(html|js)')
+    return gulp.src('src/**/*.+(html|js|css)')
         .pipe(gulp.dest('build'));
 });
 
