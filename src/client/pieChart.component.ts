@@ -52,13 +52,8 @@ export class PieChartComponent implements OnInit {
     this.color = d3.scaleOrdinal()
       .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
     this.arc = d3.arc()
-<<<<<<< HEAD
-                    .outerRadius(this.radius - 10)
-                    .innerRadius(0);
-=======
       .outerRadius(this.radius - 10)
       .innerRadius(0);
->>>>>>> bbb0a9bc26216d1cbf910bb3880ced2f71fd32ad
     this.labelArc = d3.arc()
       .outerRadius(this.radius - 40)
       .innerRadius(this.radius - 40);
