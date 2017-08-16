@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-
-
-import { STATISTICS } from './dataBar';
+import { BarChartService } from './barChart.service';
+import { IBarData } from '../server/types/IBarData';
 
 @Component({
     moduleId: module.id,
@@ -14,22 +13,35 @@ export class BarChartComponent implements OnInit {
     private width: number;
     private height: number;
     private margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    private data: IBarData[];
 
     private x: any;
     private y: any;
     private svg: any;
     private g: any;
 
-    constructor() { }
+    constructor(
+        private _barChartService: BarChartService
+    ) { }
 
     ngOnInit() {
-        this.initSvg()
-        this.initAxis();
-        this.drawAxis();
-        this.drawBars();
+        this.getData();
     }
 
-    private initSvg() {
+    getData() {
+        this._barChartService.getBarData().subscribe(
+            (data: IBarData[]) => {
+                this.data = data;
+                // this.initSvg();
+                // this.initAxis();
+                // this.drawAxis();
+                // this.drawBars();
+            },
+            (err: any) => console.error(err)
+        );
+    }
+
+    initSvg() {
         this.svg = d3.select("svg");
         this.width = +this.svg.attr("width") - this.margin.left - this.margin.right;
         this.height = +this.svg.attr("height") - this.margin.top - this.margin.bottom;
@@ -37,14 +49,14 @@ export class BarChartComponent implements OnInit {
             .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");;
     }
 
-    private initAxis() {
+    initAxis() {
         this.x = d3.scaleBand().rangeRound([0, this.width]).padding(0.1);
         this.y = d3.scaleLinear().rangeRound([this.height, 0]);
-        this.x.domain(STATISTICS.map((d) => d.letter));
-        this.y.domain([0, d3.max(STATISTICS, (d) => d.frequency)]);
+        this.x.domain(this.data.map((d) => d.prop));
+        this.y.domain([0, d3.max(this.data, (d) => d.value)]);
     }
 
-    private drawAxis() {
+    drawAxis() {
         this.g.append("g")
             .attr("class", "axis axis--x")
             .attr("transform", "translate(0," + this.height + ")")
@@ -61,14 +73,14 @@ export class BarChartComponent implements OnInit {
             .text("Frequency");
     }
 
-    private drawBars() {
+    drawBars() {
         this.g.selectAll(".bar")
-            .data(STATISTICS)
+            .data(this.data)
             .enter().append("rect")
             .attr("class", "bar")
-            .attr("x", (d) => this.x(d.letter))
-            .attr("y", (d) => this.y(d.frequency))
+            .attr("x", (d) => this.x(d.prop))
+            .attr("y", (d) => this.y(d.value))
             .attr("width", this.x.bandwidth())
-            .attr("height", (d) => this.height - this.y(d.frequency));
+            .attr("height", (d) => this.height - this.y(d.value));
     }
 }
