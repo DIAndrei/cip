@@ -1,19 +1,20 @@
-.axis {
+:host >>> .axis {
   font: 10px sans-serif;
 }
 
-.axis path, line {
+:host >>> .axis path, .axis line {
   fill: none;
   stroke: #000;
+  shape-rendering: crispEdges;
 }
 
-.axis-title {
+:host >>> .axis-title {
   fill: none;
   stroke: black;
   stroke-width: 0.5px;
 }
 
-.line {
+:host >>> .line {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
