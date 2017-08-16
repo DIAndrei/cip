@@ -6,14 +6,13 @@ import { IBarData } from '../server/types/IBarData';
 
 @Injectable()
 export class BarChartService {
-    data: IBarData[];
-    url: '/api/data/bar'
+    private barUrl: '/api/data/bar';
 
     constructor(
         private _http: Http
     ) { }
 
     getBarData(): Observable<IBarData[]> {
-        return this._http.get(this.url).map(res => res.json());
+        return this._http.get(this.barUrl).map(res => res.json());
     }
 }
