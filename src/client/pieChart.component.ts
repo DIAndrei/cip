@@ -49,8 +49,7 @@ export class PieChartComponent implements OnInit {
   }
 
   private initSvg() {
-    this.color = d3.scaleOrdinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+    this.color = d3.scaleOrdinal(d3.schemeCategory20);
     this.arc = d3.arc()
       .outerRadius(this.radius - 10)
       .innerRadius(0);
