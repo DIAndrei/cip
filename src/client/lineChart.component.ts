@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 
 import { ChartComponent } from './util/chart.component';
@@ -13,13 +13,15 @@ import { ChartService } from './util/chart.service';
   styleUrls: ['lineChart.component.css']
 })
 
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, ChartComponent {
+
+  @Input() data: ILineData[];
 
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;
 
-  private data: ILineData[];
+  // private data: ILineData[];
 
   private x: any;
   private y: any;

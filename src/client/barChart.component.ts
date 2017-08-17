@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 import { ChartService } from './util/chart.service';
+import { ChartComponent } from './util/chart.component';
 import { IBarData } from '../server/types/IBarData';
 
 @Component({
@@ -9,11 +10,14 @@ import { IBarData } from '../server/types/IBarData';
     templateUrl: './lineChart.html',
     styleUrls: ['barChart.component.css']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent implements OnInit, ChartComponent {
+
+
+    @Input() data: IBarData[];
     private width: number;
     private height: number;
     private margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    private data: IBarData[];
+    // private data: IBarData[];
 
     private x: any;
     private y: any;

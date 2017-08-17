@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { ChartComponent } from './util/chart.component';
+// import { ChartComponent } from './util/chart.component';
 import { ChartService } from './util/chart.service';
 
 import { LineChartComponent } from './lineChart.component';
@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
-    ChartComponent,
+    // ChartComponent,
     LineChartComponent,
     PieChartComponent,
     BarChartComponent
@@ -31,6 +31,8 @@ import { AppComponent } from './app.component';
   providers: [
     ChartService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  entryComponents: [LineChartComponent, PieChartComponent, BarChartComponent]
 })
 export class AppModule { }

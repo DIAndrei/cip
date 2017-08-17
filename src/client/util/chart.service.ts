@@ -1,6 +1,6 @@
 import { Component, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { ChartComponent } from './chart.component';
+// import { ChartComponent } from './chart.component';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { IBarData } from '../../server/types/IBarData';

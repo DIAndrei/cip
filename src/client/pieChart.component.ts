@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 import { ChartService } from './util/chart.service';
 import { ChartComponent } from './util/chart.component';
@@ -12,11 +12,12 @@ import { IBarData } from '../server/types/IBarData';
   styleUrls: ['pieChart.component.css']
 })
 
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, ChartComponent {
+
+  @Input() data: IBarData[];
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;
-  private data: IBarData[];
   private radius: number;
   private arc: any;
   private labelArc: any;
