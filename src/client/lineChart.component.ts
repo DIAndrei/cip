@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 
 import { ChartComponent } from './util/chart.component';
-import { Data } from './data';
 import { ILineData } from '../server/types/ILineData';
-import { LineChartService } from './lineChart.service';
+import { ChartService } from './util/chart.service';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class LineChartComponent implements OnInit {
 
   private parseTime = d3.isoParse;
 
-  constructor(private _lineChartService: LineChartService) {
+  constructor(private _lineChartService: ChartService) {
 
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;

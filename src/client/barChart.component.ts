@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { BarChartService } from './barChart.service';
+import { ChartService } from './util/chart.service';
 import { IBarData } from '../server/types/IBarData';
 
 @Component({
@@ -21,7 +21,7 @@ export class BarChartComponent implements OnInit {
     private g: any;
 
     constructor(
-        private _barChartService: BarChartService
+        private _barChartService: ChartService
     ) { }
 
     ngOnInit() {

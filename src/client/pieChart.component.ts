@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
-import { BarChartService } from './barChart.service';
+import { ChartService } from './util/chart.service';
 import { ChartComponent } from './util/chart.component';
 
 import { IBarData } from '../server/types/IBarData';
@@ -26,7 +26,7 @@ export class PieChartComponent implements OnInit {
 
 
   constructor(
-    private _barChartService: BarChartService
+    private _barChartService: ChartService
   ) {
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;

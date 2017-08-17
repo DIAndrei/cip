@@ -10,9 +10,6 @@ import { LineChartComponent } from './lineChart.component';
 import { PieChartComponent } from './pieChart.component';
 import { BarChartComponent } from './barChart.component';
 
-import { BarChartService } from './barChart.service';
-import { LineChartService } from './lineChart.service';
-
 import { AppComponent } from './app.component';
 
 // import { AppRoutingModule } from './app-routing.module';
@@ -32,9 +29,7 @@ import { AppComponent } from './app.component';
     BarChartComponent
   ],
   providers: [
-    ChartService,
-    BarChartService,
-    LineChartService
+    ChartService
   ],
   bootstrap: [AppComponent]
 })
