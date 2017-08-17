@@ -1,14 +1,16 @@
 import * as mongoose from 'mongoose';
-
+import { IChartData } from '../types/IChartData';
 const Schema = mongoose.Schema;
 
-export interface DataDocument extends mongoose.Document {
-    _id: string,
-    date: Date,
-    value: number
+export interface DataDocument extends mongoose.Document, IChartData {
+    _id: string
 }
 
 const DataSchema = new Schema({
+    prop: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         required: true

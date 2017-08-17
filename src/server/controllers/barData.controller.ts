@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { BarDataModel as Data } from '../models/barData';
-import { IBarData } from '../types/IBarData';
+import { IChartData } from '../types/IChartData';
+
 export class DataController {
     constructor() { }
-    async getData(): Promise<IBarData[]> {
-        return await Data.find().lean().exec() as IBarData[];
+    async getData(): Promise<IChartData[]> {
+        return await Data.find().lean().exec() as IChartData[];
     }
-    async postData(newData: IBarData): Promise<void> {
+    async postData(newData: IChartData): Promise<void> {
         let data = new Data(newData);
         await data.save();
     }

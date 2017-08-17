@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { DataModel as Data } from '../models/lineData';
-import { ILineData } from '../types/ILineData';
+import { IChartData } from '../types/IChartData';
 
 export class DataController {
     constructor() { }
-    async getData(): Promise<ILineData[]> {
-        return await Data.find().sort({ 'date': 1 }).lean().exec() as ILineData[];
+    async getData(): Promise<IChartData[]> {
+        return await Data.find().sort({ 'date': 1 }).lean().exec() as IChartData[];
     }
-    async postData(newData): Promise<void> {
+    async postData(newData: IChartData): Promise<void> {
         let data = new Data(newData);
         await data.save();
     }

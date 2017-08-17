@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
-import { IBarData } from '../types/IBarData';
+import { IChartData } from '../types/IChartData';
 const Schema = mongoose.Schema;
 
-export interface BarDataDocument extends mongoose.Document, IBarData {
+export interface BarDataDocument extends mongoose.Document, IChartData {
     _id: string
 }
 

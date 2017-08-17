@@ -1,7 +1,10 @@
 import * as express from 'express';
-import { DataController } from '../controllers/lineData.controller'
+import { DataController } from '../controllers/lineData.controller';
+import { Util } from '../util/util';
+
 const router = express.Router();
 const lineDataCtrl = new DataController();
+const util = new Util();
 
 module.exports = router;
 
@@ -18,7 +21,8 @@ router.post('/api/data/line', async (req: express.Request, res: express.Response
     try {
         let _value = new Date().getTime() % 1000;
         await lineDataCtrl.postData({
-            date: randomDate(new Date(2012, 0, 1), new Date()),
+            prop: util.makeDummyWord(),
+            date: util.randomDate(new Date(2012, 0, 1), new Date()),
             value: _value
         });
         res.status(200).end();
@@ -26,7 +30,3 @@ router.post('/api/data/line', async (req: express.Request, res: express.Response
         res.status(500).end();
     }
 });
-
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
