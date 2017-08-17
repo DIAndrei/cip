@@ -27,7 +27,7 @@ export class LineChartComponent implements OnInit {
   private svg: any;
   private line: d3.Line<[number, number]>;
 
-  private parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
+  private parseTime = d3.isoParse;
 
   constructor(private _lineChartService: LineChartService) {
 
@@ -86,8 +86,7 @@ export class LineChartComponent implements OnInit {
       .attr('transform', 'rotate(-90)')
       .attr('y', 6)
       .attr('dy', '.71em')
-      .style('text-anchor', 'end')
-      .text('Price ($)');
+      .style('text-anchor', 'end');
   }
 
   private drawLine() {
