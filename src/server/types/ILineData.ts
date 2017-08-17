@@ -1,4 +1,4 @@
 export interface ILineData {
-    date: Date,
+    date: any,
     value: number
 }
