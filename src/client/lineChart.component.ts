@@ -27,9 +27,9 @@ export class LineChartComponent implements OnInit {
   private svg: any;
   private line: d3.Line<[number, number]>;
 
-  
+  private parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
-  constructor( private _lineChartService: LineChartService ) {
+  constructor(private _lineChartService: LineChartService) {
 
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;
@@ -37,21 +37,26 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    
+
   }
 
   getData() {
     this._lineChartService.getLineData().subscribe(
       data => {
-          this.data = data;
-          this.initSvg();
-          this.initAxis();
-          this.drawAxis();
-          this.drawLine();
+        this.data = data.map((d) => {
+          return {
+            date: this.parseTime(d.date),
+            value: d.value
+          };
+        });
+        this.initSvg();
+        this.initAxis();
+        this.drawAxis();
+        this.drawLine();
       },
       err => console.error(err)
     );
-    }
+  }
 
   private initSvg() {
     this.svg = d3.select('svg')
