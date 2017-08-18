@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 
-import { ChartComponent } from './util/chart.component';
-import { IChartData } from './../server/types/IChartData';
-import { ChartService } from './util/chart.service';
+import { ChartComponent } from './../util/chart.component';
+import { IChartData } from './../../server/types/IChartData';
+import { ChartService } from './../util/chart.service';
 
 
 @Component({
   moduleId: module.id,
   selector: 'line-chart',
-  templateUrl: './lineChart.html',
+  template: '<svg width="900" height="500"></svg>',
   styleUrls: ['lineChart.component.css']
 })
 

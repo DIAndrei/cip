@@ -6,9 +6,9 @@ import { HttpModule } from '@angular/http';
 // import { ChartComponent } from './util/chart.component';
 import { ChartService } from './util/chart.service';
 
-import { LineChartComponent } from './lineChart.component';
-import { PieChartComponent } from './pieChart.component';
-import { BarChartComponent } from './barChart.component';
+import { LineChartComponent } from './lineChart/lineChart.component';
+import { PieChartComponent } from './pieChart/pieChart.component';
+import { BarChartComponent } from './barChart/barChart.component';
 
 import { AppComponent } from './app.component';
 
