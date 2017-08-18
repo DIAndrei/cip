@@ -2,14 +2,17 @@ import * as mongoose from 'mongoose';
 import { IChartData } from '../types/IChartData';
 const Schema = mongoose.Schema;
 
-export interface BarDataDocument extends mongoose.Document, IChartData {
+export interface DataDocument extends mongoose.Document, IChartData {
     _id: string
 }
 
-const BarDataSchema = new Schema({
+const DataSchema = new Schema({
     prop: {
         type: String,
         required: true
+    },
+    date: {
+        type: Date
     },
     value: {
         type: Number,
@@ -17,4 +20,4 @@ const BarDataSchema = new Schema({
     }
 });
 
-export var BarDataModel = mongoose.model<BarDataDocument>('BarData', BarDataSchema);
+export var DataModel = mongoose.model<DataDocument>('Data', DataSchema);
