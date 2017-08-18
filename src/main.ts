@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, '../node_modules')));
 app.use(express.static(path.join(__dirname, './client')));
+app.use(express.static(path.join(__dirname, '../')));
 
 app.use(require('./server/routes/data.routes'));
 
