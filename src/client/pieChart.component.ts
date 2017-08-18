@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import { ChartService } from './util/chart.service';
 import { ChartComponent } from './util/chart.component';
 
-import { IBarData } from '../server/types/IBarData';
+import { IChartData } from './../server/types/IChartData';
 
 @Component({
   moduleId: module.id,
@@ -14,7 +14,7 @@ import { IBarData } from '../server/types/IBarData';
 
 export class PieChartComponent implements OnInit, ChartComponent {
 
-  @Input() data: IBarData[];
+  @Input() data: IChartData[];
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;

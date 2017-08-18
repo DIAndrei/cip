@@ -3,8 +3,7 @@ import { Http } from '@angular/http';
 // import { ChartComponent } from './chart.component';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
-import { IBarData } from '../../server/types/IBarData';
-import { ILineData } from '../../server/types/ILineData';
+import { IChartData } from '../../server/types/IChartData';
 
 @Injectable()
 export class ChartService {
@@ -12,11 +11,11 @@ export class ChartService {
 
     private url = '/api/data/';
 
-    getBarData(): Observable<IBarData[]> {
+    getBarData(): Observable<IChartData[]> {
         return this._http.get(`${this.url}bar`).map(res => res.json());
     }
 
-    getLineData(): Observable<ILineData[]> {
+    getLineData(): Observable<IChartData[]> {
         return this._http.get(`${this.url}line`).map(res => res.json());
     }
 

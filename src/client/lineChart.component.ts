@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 
 import { ChartComponent } from './util/chart.component';
-import { ILineData } from '../server/types/ILineData';
+import { IChartData } from './../server/types/IChartData';
 import { ChartService } from './util/chart.service';
 
 
@@ -15,13 +15,13 @@ import { ChartService } from './util/chart.service';
 
 export class LineChartComponent implements OnInit, ChartComponent {
 
-  @Input() data: ILineData[];
+  @Input() data: IChartData[];
 
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;
 
-  // private data: ILineData[];
+  // private data: IChartData[];
 
   private x: any;
   private y: any;
@@ -46,6 +46,7 @@ export class LineChartComponent implements OnInit, ChartComponent {
       data => {
         this.data = data.map((d) => {
           return {
+            prop: d.prop,
             date: this.parseTime(d.date),
             value: d.value
           };
