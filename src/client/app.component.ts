@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-app',
-  template: '<line-chart></line-chart>'
+  template: 'chart-banner'
   // template: '<bar-chart></bar-chart>'
   // template: '<pie-chart></pie-chart>'
 })

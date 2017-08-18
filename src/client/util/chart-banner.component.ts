@@ -5,7 +5,14 @@ import { IChartData } from '../../server/types/IChartData';
 import { ChartItem } from './chart-item';
 import { ChartComponent } from './chart.component';
 
-
+@Component({
+  selector: 'chart-banner',
+  template: `
+              <div class="chart-banner">
+                <ng-template chart-host></ng-template>
+              </div>
+            `
+})
 
 export class ChartBannerComponent implements AfterViewInit {
     @Input() charts: ChartItem[];
