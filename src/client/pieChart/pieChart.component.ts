@@ -1,21 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import * as d3 from 'd3';
 import { ChartService } from './../util/chart.service';
-import { ChartComponent } from './../util/chart.component';
-
 import { IChartData } from './../../server/types/IChartData';
 
 @Component({
   moduleId: module.id,
-  selector: 'pie-chart',
   template: '<svg width="900" height="500"></svg>',
   styleUrls: ['pieChart.component.css']
 })
-
-export class PieChartComponent implements OnInit, ChartComponent {
+export class PieChartComponent implements OnInit {
 
   @Input() data: IChartData[];
-  private margin = { top: 20, right: 20, bottom: 30, left: 50 };
+  private margin = { top: 20, right: 20, bottom: 30, left: 40 };
   private width: number;
   private height: number;
   private radius: number;
@@ -27,7 +23,8 @@ export class PieChartComponent implements OnInit, ChartComponent {
 
 
   constructor(
-    private _barChartService: ChartService
+    private _barChartService: ChartService,
+    private _injector: Injector
   ) {
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;

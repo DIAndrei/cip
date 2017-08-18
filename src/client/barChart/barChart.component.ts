@@ -1,23 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import * as d3 from 'd3';
 import { ChartService } from './../util/chart.service';
-import { ChartComponent } from './../util/chart.component';
 import { IChartData } from './../../server/types/IChartData';
 
 @Component({
     moduleId: module.id,
-    selector: 'bar-chart',
     template: '<svg width="900" height="500"></svg>',
     styleUrls: ['barChart.component.css']
 })
-export class BarChartComponent implements OnInit, ChartComponent {
-
-
-    @Input() data: IChartData[];
+export class BarChartComponent implements OnInit {
+    // @Input() data: IChartData[];
     private width: number;
     private height: number;
     private margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    // private data: IChartData[];
+
+    private data: IChartData[];
 
     private x: any;
     private y: any;
@@ -25,7 +22,8 @@ export class BarChartComponent implements OnInit, ChartComponent {
     private g: any;
 
     constructor(
-        private _barChartService: ChartService
+        private _barChartService: ChartService,
+        private _injector: Injector
     ) { }
 
     ngOnInit() {

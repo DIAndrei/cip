@@ -1,27 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Injector } from '@angular/core';
 import * as d3 from 'd3';
-
-import { ChartComponent } from './../util/chart.component';
 import { IChartData } from './../../server/types/IChartData';
 import { ChartService } from './../util/chart.service';
 
 
 @Component({
   moduleId: module.id,
-  selector: 'line-chart',
   template: '<svg width="900" height="500"></svg>',
   styleUrls: ['lineChart.component.css']
 })
 
-export class LineChartComponent implements OnInit, ChartComponent {
+export class LineChartComponent implements OnInit {
 
-  @Input() data: IChartData[];
+  // @Input() data: IChartData[];
 
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;
 
-  // private data: IChartData[];
+  private data: IChartData[];
 
   private x: any;
   private y: any;
@@ -30,7 +27,10 @@ export class LineChartComponent implements OnInit, ChartComponent {
 
   private parseTime = d3.isoParse;
 
-  constructor(private _lineChartService: ChartService) {
+  constructor(
+    private _lineChartService: ChartService,
+    private _injector: Injector
+  ) {
 
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;
@@ -41,13 +41,17 @@ export class LineChartComponent implements OnInit, ChartComponent {
 
   }
 
+  setDate(date: Date) {
+
+  }
+
   getData() {
     this._lineChartService.getLineData().subscribe(
       data => {
         this.data = data.map((d) => {
           return {
             prop: d.prop,
-            date: this.parseTime(d.date),
+            date: this.parseTime(d.date as any),
             value: d.value
           };
         });

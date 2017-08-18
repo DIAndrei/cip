@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 // import { ChartComponent } from './util/chart.component';
 import { ChartService } from './util/chart.service';
-
+import { ChartComponent } from './util/chart.component';
+import { ChartDirective } from './util/chart.directive';
 import { LineChartComponent } from './lineChart/lineChart.component';
 import { PieChartComponent } from './pieChart/pieChart.component';
 import { BarChartComponent } from './barChart/barChart.component';
@@ -23,10 +24,11 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
-    // ChartComponent,
+    ChartComponent,
     LineChartComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ChartDirective
   ],
   providers: [
     ChartService
