@@ -1,17 +1,24 @@
 export class Util {
     constructor() { }
 
-    randomDate(start, end) {
-        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    randomDate(start: Date, days: number) {
+        return new Date(start.getTime() + (days * 24 * 60 * 60 * 1000));
     }
 
-    makeDummyWord() {
-        let text: string = '';
-        const ALPHABET: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        for (let i = 0; i < 5; i++) {
-            text += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+    randomNumber(max: number, min: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    makeWord(type: string = null) {
+        switch (type) {
+            case 'installs':
+                return 'installs';
+            case 'uninstalls':
+                return 'uninstalls';
+            case 'upgrades':
+                return 'upgrades';
+            default:
+                return 'test';
         }
-        return text;
     }
-
 }
