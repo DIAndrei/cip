@@ -65,7 +65,7 @@ export class BarChartComponent implements OnInit {
             .call(d3.axisBottom(this.x));
         this.g.append("g")
             .attr("class", "axis axis--y")
-            .call(d3.axisLeft(this.y).ticks(10, "%"))
+            .call(d3.axisLeft(this.y).ticks(10))
             .append("text")
             .attr("class", "axis-title")
             .attr("transform", "rotate(-90)")
