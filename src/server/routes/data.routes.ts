@@ -22,15 +22,16 @@ router.get('/api/data/bar', async (req: express.Request, res: express.Response):
 });
 
 router.post('/api/data/bar', async (req: express.Request, res: express.Response): Promise<void> => {
-    try {
-        let _value = new Date().getTime() % 1000;
-        await dataCtrl.postData({
-            prop: util.makeDummyWord(),
-            value: _value
-        });
-        res.end();
-    } catch (err) {
-        res.status(500).end();
+    for (let i = 0; i < 14; i++) {
+        try {
+            await dataCtrl.postData({
+                prop: util.makeWord(),
+                value: util.randomNumber(100, i)
+            });
+            res.end();
+        } catch (err) {
+            res.status(500).end();
+        }
     }
 });
 
@@ -47,15 +48,16 @@ router.get('/api/data/line', async (req: express.Request, res: express.Response)
 });
 
 router.post('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
-    try {
-        let _value = new Date().getTime() % 1000;
-        await dataCtrl.postData({
-            prop: util.makeDummyWord(),
-            date: util.randomDate(new Date(2012, 0, 1), new Date()),
-            value: _value
-        });
-        res.end();
-    } catch (err) {
-        res.status(500).end();
+    for (let i = 0; i < 21; i++) {
+        try {
+            await dataCtrl.postData({
+                prop: util.makeWord('installs'),
+                date: util.randomDate(new Date(2017, 1, 1), i),
+                value: util.randomNumber(100, i)
+            });
+            res.end();
+        } catch (err) {
+            res.status(500).end();
+        }
     }
 });
