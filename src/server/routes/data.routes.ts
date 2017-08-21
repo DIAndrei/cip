@@ -22,10 +22,12 @@ router.get('/api/data/bar', async (req: express.Request, res: express.Response):
 });
 
 router.post('/api/data/bar', async (req: express.Request, res: express.Response): Promise<void> => {
-    for (let i = 0; i < 14; i++) {
+    let type: string = req.query.type;
+    let num: number = req.query.num;
+    for (let i = 0; i < num; i++) {
         try {
             await dataCtrl.postData({
-                prop: util.makeWord(),
+                prop: type,
                 value: util.randomNumber(100, i)
             });
             res.end();
@@ -48,10 +50,12 @@ router.get('/api/data/line', async (req: express.Request, res: express.Response)
 });
 
 router.post('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
-    for (let i = 0; i < 21; i++) {
+    let type: string = req.query.type;
+    let num: number = req.query.num;
+    for (let i = 0; i < num; i++) {
         try {
             await dataCtrl.postData({
-                prop: util.makeWord('installs'),
+                prop: type,
                 date: util.randomDate(new Date(2017, 1, 1), i),
                 value: util.randomNumber(100, i)
             });
