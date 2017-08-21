@@ -11,7 +11,7 @@ module.exports = router;
 
 router.get('/api/data/bar', async (req: express.Request, res: express.Response): Promise<void> => {
     let query: IDataParams = {
-        date: { $exists: false }
+        report: req.query.report
     }
     try {
         let data = await dataCtrl.getData(query);
@@ -22,13 +22,16 @@ router.get('/api/data/bar', async (req: express.Request, res: express.Response):
 });
 
 router.post('/api/data/bar', async (req: express.Request, res: express.Response): Promise<void> => {
-    let type: string = req.query.type;
+    let name: string = req.query.name;
     let num: number = req.query.num;
+    let report: string = req.query.report;
     for (let i = 0; i < num; i++) {
         try {
             await dataCtrl.postData({
-                prop: type,
-                value: util.randomNumber(100, i)
+                prop: name,
+                date: new Date(),
+                value: util.randomNumber(100, i),
+                report: report || 'default'
             });
             res.end();
         } catch (err) {
@@ -39,7 +42,7 @@ router.post('/api/data/bar', async (req: express.Request, res: express.Response)
 
 router.get('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
     let query: IDataParams = {
-        date: { $exists: true }
+        report: req.query.report
     }
     try {
         let data = await dataCtrl.getData(query);
@@ -50,14 +53,16 @@ router.get('/api/data/line', async (req: express.Request, res: express.Response)
 });
 
 router.post('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
-    let type: string = req.query.type;
+    let name: string = req.query.name;
     let num: number = req.query.num;
+    let report: string = req.query.report;
     for (let i = 0; i < num; i++) {
         try {
             await dataCtrl.postData({
-                prop: type,
+                prop: name,
                 date: util.randomDate(new Date(2017, 1, 1), i),
-                value: util.randomNumber(100, i)
+                value: util.randomNumber(100, i),
+                report: report || 'default'
             });
             res.end();
         } catch (err) {

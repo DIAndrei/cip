@@ -11,7 +11,7 @@ export class ChartService {
     private url = '/api/data/';
 
     getBarData(): Observable<IChartData[]> {
-        return this._http.get(`${this.url}bar`).map(res => res.json());
+        return this._http.get(`${this.url}bar?report=versions`).map(res => res.json());
     }
 
     getLineData(): Observable<IChartData[]> {

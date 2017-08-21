@@ -1,3 +1,3 @@
 export interface IDataParams {
-    date?: any
+    report: string
 }

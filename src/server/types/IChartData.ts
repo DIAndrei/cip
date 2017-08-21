@@ -1,5 +1,6 @@
 export interface IChartData {
     prop: string,
-    date?: Date,
-    value: number
+    date: Date,
+    value: number,
+    report: string
 }

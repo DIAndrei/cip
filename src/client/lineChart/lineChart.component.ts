@@ -52,7 +52,8 @@ export class LineChartComponent implements OnInit {
           return {
             prop: d.prop,
             date: this.parseTime(d.date as any),
-            value: d.value
+            value: d.value,
+            report: d.report
           };
         });
         this.initSvg();

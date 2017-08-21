@@ -17,6 +17,10 @@ const DataSchema = new Schema({
     value: {
         type: Number,
         required: true
+    },
+    report: {
+        type: String,
+        required: true
     }
 });
 
