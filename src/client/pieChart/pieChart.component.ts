@@ -10,7 +10,8 @@ import { IChartData } from './../../server/types/IChartData';
 })
 export class PieChartComponent implements OnInit {
 
-  @Input() data: IChartData[];
+  // @Input() data: IChartData[];
+  private data: IChartData[];
   private margin = { top: 20, right: 20, bottom: 30, left: 40 };
   private width: number;
   private height: number;
@@ -47,7 +48,7 @@ export class PieChartComponent implements OnInit {
   }
 
   private initSvg() {
-    this.color = d3.scaleOrdinal(d3.schemeCategory20);
+    this.color = d3.scaleOrdinal(d3.schemeCategory10);
     this.arc = d3.arc()
       .outerRadius(this.radius - 10)
       .innerRadius(0);
