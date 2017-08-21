@@ -16,7 +16,7 @@ import { ChartDirective } from './chart.directive'
     templateUrl: 'chart.html'
 })
 export class ChartComponent {
-    // @Input() charts;
+    private chartType: any = IChartType;
     @ViewChild(ChartDirective) chartHost: ChartDirective;
     currentChartIndex = 0;
     constructor(
@@ -28,7 +28,7 @@ export class ChartComponent {
     }
 
     loadComponent(type: string) {
-        let compClass = this.getChartComponent(type);
+        let compClass = this.getChartComponent(IChartType[type]);
         let componentFactory = this._componentFactoryResolver.resolveComponentFactory(compClass);
         let viewContainerRef = this.chartHost._viewContainerRef;
         viewContainerRef.clear();
@@ -36,13 +36,13 @@ export class ChartComponent {
         // (<BarChartComponent>componentRef.instance).data = currentChart.data;
     }
 
-    private getChartComponent(type: any) {
-        switch (type) {
-            case 'bar':
+    private getChartComponent(chartType: IChartType) {
+        switch (chartType) {
+            case IChartType.Bar:
                 return BarChartComponent;
-            case 'line':
+            case IChartType.Line:
                 return LineChartComponent;
-            case 'pie':
+            case IChartType.Pie:
                 return PieChartComponent;
             default:
                 return LineChartComponent;
