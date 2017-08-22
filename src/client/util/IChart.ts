@@ -1,11 +1,11 @@
 import { IChartData } from './../../server/types/IChartData'
 
 export interface IChart {
-    type: IChartType,
+    type: ChartType,
     data: IChartData[]
 }
 
-export enum IChartType {
+export enum ChartType {
     Bar,
     Line,
     Pie

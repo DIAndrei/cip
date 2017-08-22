@@ -1,9 +1,9 @@
 <div>
     <h4>Chart</h4>
     <div>
-        <button (click)="loadComponent(chartType[0])">Bar Chart</button>
-        <button (click)="loadComponent(chartType[1])">Line Chart</button>
-        <button (click)="loadComponent(chartType[2])">Pie Chart</button>
+        <button (click)="loadComponent(ChartEnum.Bar)">Bar Chart</button>
+        <button (click)="loadComponent(ChartEnum.Line)">Line Chart</button>
+        <button (click)="loadComponent(ChartEnum.Pie)">Pie Chart</button>
     </div>
     <ng-template chart-host></ng-template>
 </div>
