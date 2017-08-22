@@ -3,47 +3,38 @@ import * as d3 from 'd3';
 import { IChartData } from './../../server/types/IChartData';
 import { ChartService } from './../util/chart.service';
 
-
 @Component({
   moduleId: module.id,
   template: '<svg width="900" height="500"></svg>',
   styleUrls: ['lineChart.component.css']
 })
-
 export class LineChartComponent implements OnInit {
 
   // @Input() data: IChartData[];
+  private data: IChartData[];
 
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
   private width: number;
   private height: number;
-
-  private data: IChartData[];
-
   private x: any;
   private y: any;
   private svg: any;
   private line: d3.Line<[number, number]>;
-
-  private parseTime = d3.isoParse;
+  private parseTime = d3.timeParse('%Y-%m-%d');
 
   constructor(
     private _lineChartService: ChartService,
     private _injector: Injector
   ) {
-
     this.width = 900 - this.margin.left - this.margin.right;
     this.height = 500 - this.margin.top - this.margin.bottom;
   }
 
   ngOnInit() {
     this.getData();
-
   }
 
-  setDate(date: Date) {
-
-  }
+  // setDate(date: Date) { }
 
   getData() {
     this._lineChartService.getLineData().subscribe(
@@ -79,11 +70,12 @@ export class LineChartComponent implements OnInit {
   }
 
   private drawAxis() {
-
     this.svg.append('g')
       .attr('class', 'axis axis--x')
       .attr('transform', 'translate(0,' + this.height + ')')
-      .call(d3.axisBottom(this.x));
+      .call(d3.axisBottom(this.x)
+        .ticks(d3.timeDay.every(2))
+        .tickFormat(d3.timeFormat('%b %d')));
 
     this.svg.append('g')
       .attr('class', 'axis axis--y')
@@ -106,5 +98,13 @@ export class LineChartComponent implements OnInit {
       .attr('class', 'line')
       .attr('d', this.line);
 
+    this.svg.selectAll('circle')
+      .data(this.data)
+      .enter()
+      .append('circle')
+      .attr('class', 'data-point')
+      .attr('cx', (d: any) => { return this.x(d.date) })
+      .attr('cy', (d: any) => { return this.y(d.value) })
+      .attr('r', 5);
   }
 }
