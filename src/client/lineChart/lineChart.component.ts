@@ -21,6 +21,7 @@ export class LineChartComponent implements OnInit {
   private svg: any;
   private line: d3.Line<[number, number]>;
   private parseTime = d3.timeParse('%Y-%m-%d');
+  private tooltip: any;
 
   constructor(
     private _lineChartService: ChartService,
@@ -57,6 +58,7 @@ export class LineChartComponent implements OnInit {
   }
 
   private initSvg() {
+    this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
     this.svg = d3.select('svg')
       .append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
@@ -105,6 +107,16 @@ export class LineChartComponent implements OnInit {
       .attr('class', 'data-point')
       .attr('cx', (d: any) => { return this.x(d.date) })
       .attr('cy', (d: any) => { return this.y(d.value) })
-      .attr('r', 5);
+      .attr('r', 5)
+      .on('mousemove', (d) => {
+        this.tooltip
+          .style('left', d3.event.pageX - 50 + 'px')
+          .style('top', d3.event.pageY - 70 + 'px')
+          .style('display', 'inline-block')
+          .html((d.prop) + ': ' + (d.value));
+      })
+      .on('mouseout', (d) => {
+        this.tooltip.style('display', 'none');
+      });;
   }
 }
