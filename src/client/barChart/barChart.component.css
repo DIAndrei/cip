@@ -2,12 +2,19 @@
     fill: #ff8533
 }
 
-:host >>> .bar:hover {
-    opacity: 0.7
-}
-
 :host >>> .axis-title {
     fill: none;
     stroke: black;
     stroke-width: 0.5px
+}
+
+:host >>> .tooltip {
+    position: absolute;
+    display: none;
+    min-width: 80px;
+    height: auto;
+    background: none repeat scroll 0 0 #ffb584;
+    border: 2px solid #ff6500;
+    padding: 10px;
+    text-align: center;
 }

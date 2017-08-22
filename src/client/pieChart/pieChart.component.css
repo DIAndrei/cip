@@ -6,3 +6,14 @@
 :host >>> .arc path {
   stroke: #fff;
 }
+
+:host >>> .tooltip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffb584;
+  border: 2px solid #ff6500;
+  padding: 10px;
+  text-align: center;
+}
