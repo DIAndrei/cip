@@ -17,4 +17,7 @@
     border: 2px solid #ff6500;
     padding: 10px;
     text-align: center;
+    opacity: 0.8;
+    font-family: sans-serif;
+    border-radius: 5px
 }
