@@ -1,19 +1,15 @@
-import { Component, OnInit, Input, Injector } from '@angular/core';
+import { Component, Input, Injector, ViewChild, ElementRef } from '@angular/core';
 import * as d3 from 'd3';
-import { ChartService } from './../util/chart.service';
+import { IChart, ChartType } from '../util/chart/IChart';
 import { IChartData } from './../../server/types/IChartData';
 
 @Component({
   moduleId: module.id,
-  template: '<svg width="900" height="500"></svg>',
+  template: '<svg #canvas width="900" height="500"></svg>',
   styleUrls: ['pieChart.component.css']
 })
-export class PieChartComponent implements OnInit {
-
-  // @Input() data: IChartData[];
-  private data: IChartData[];
-
-  private margin = { top: 20, right: 20, bottom: 30, left: 40 };
+export class PieChartComponent implements IChart {
+  private margin = { top: 50, right: 50, bottom: 50, left: 50 };
   private width: number;
   private height: number;
   private radius: number;
@@ -24,8 +20,10 @@ export class PieChartComponent implements OnInit {
   private svg: any;
   private tooltip: any;
 
+  @ViewChild('canvas') canvas: ElementRef;
+  public type = ChartType.Pie;
+
   constructor(
-    private _barChartService: ChartService,
     private _injector: Injector
   ) {
     this.width = 900 - this.margin.left - this.margin.right;
@@ -33,24 +31,17 @@ export class PieChartComponent implements OnInit {
     this.radius = Math.min(this.width, this.height) / 2;
   }
 
-  ngOnInit() {
-    this.getData();
-  }
-
-  getData() {
-    this._barChartService.getBarData().subscribe(
-      data => {
-        this.data = data;
-        this.initSvg()
-        this.drawPie();
-      },
-      err => console.error(err)
-    );
+  /**
+   * IChart interface methods
+   */
+  setData(data: IChartData[]) {
+    this.initSvg()
+    this.drawPie(data);
   }
 
   private initSvg() {
-    this.color = d3.scaleOrdinal(d3.schemeCategory10);
     this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
+    this.color = d3.scaleOrdinal(d3.schemeCategory10);
     this.arc = d3.arc()
       .outerRadius(this.radius - 10)
       .innerRadius(0);
@@ -60,14 +51,14 @@ export class PieChartComponent implements OnInit {
     this.pie = d3.pie()
       .sort(null)
       .value((d: any) => d.value);
-    this.svg = d3.select('svg')
+    this.svg = d3.select(this.canvas.nativeElement)
       .append('g')
       .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');;
   }
 
-  private drawPie() {
+  private drawPie(data: IChartData[]) {
     let g = this.svg.selectAll('.arc')
-      .data(this.pie(this.data))
+      .data(this.pie(data))
       .enter().append('g')
       .attr('class', 'arc')
       .on('mousemove', (d) => {

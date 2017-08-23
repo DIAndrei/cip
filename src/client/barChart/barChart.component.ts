@@ -1,65 +1,58 @@
-import { Component, OnInit, Input, Injector } from '@angular/core';
+import { Component, Input, Injector, ViewChild, ElementRef } from '@angular/core';
 import * as d3 from 'd3';
-import { ChartService } from './../util/chart.service';
+import { IChart, ChartType } from '../util/chart/IChart';
 import { IChartData } from './../../server/types/IChartData';
 
 @Component({
     moduleId: module.id,
-    template: '<svg width="900" height="500"></svg>',
+    template: '<svg #canvas width="900" height="500"></svg>',
     styleUrls: ['barChart.component.css']
 })
-export class BarChartComponent implements OnInit {
-    // @Input() data: IChartData[];
-    private data: IChartData[];
-
+export class BarChartComponent implements IChart {
     private width: number;
     private height: number;
-    private margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    private margin = { top: 50, right: 50, bottom: 50, left: 50 };
     private x: any;
     private y: any;
     private svg: any;
     private g: any;
     private tooltip: any;
 
+    @ViewChild('canvas') canvas: ElementRef;
+
+    public type = ChartType.Bar;
+
     constructor(
-        private _barChartService: ChartService,
         private _injector: Injector
     ) { }
 
-    ngOnInit() {
-        this.getData();
+    /**
+     * IChart interface methods
+     */
+    setData(data: IChartData[]) {
+        this.initSvg();
+        this.initAxis(data);
+        this.drawAxis();
+        this.drawBars(data);
     }
 
-    getData() {
-        this._barChartService.getBarData().subscribe(
-            data => {
-                this.data = data;
-                this.initSvg();
-                this.initAxis();
-                this.drawAxis();
-                this.drawBars();
-            },
-            err => console.error(err)
-        );
-    }
-
-    initSvg() {
-        this.svg = d3.select('svg');
+    private initSvg() {
         this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
+        this.svg = d3.select(this.canvas.nativeElement);
         this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
         this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
         this.g = this.svg.append('g')
             .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');;
     }
 
-    initAxis() {
+    private initAxis(data: IChartData[]) {
         this.x = d3.scaleLinear().rangeRound([0, this.width]);
         this.y = d3.scaleBand().rangeRound([this.height, 0]).padding(0.1);
-        this.x.domain([0, d3.max(this.data, (d) => d.value)]);
-        this.y.domain(this.data.map((d) => d.prop));
+        this.x.domain([0, d3.max(data, (d) => d.value)]);
+        this.y.domain(data.map((d) => d.prop));
     }
 
-    drawAxis() {
+    private drawAxis() {
         this.g.append('g')
             .attr('class', 'axis axis--x')
             .attr('transform', 'translate(0,' + this.height + ')')
@@ -70,16 +63,16 @@ export class BarChartComponent implements OnInit {
             .call(d3.axisLeft(this.y));
     }
 
-    drawBars() {
+    private drawBars(data: IChartData[]) {
         this.g.selectAll('.bar')
-            .data(this.data)
+            .data(data)
             .enter()
             .append('rect')
             .attr('class', 'bar')
             .attr('x', 0)
             .attr('y', (d) => this.y(d.prop))
             .attr('height', this.y.bandwidth())
-            .attr('width', (d) => this.x(d.value))            
+            .attr('width', (d) => this.x(d.value))
             .on('mousemove', (d) => {
                 this.tooltip
                     .style('left', d3.event.pageX - 50 + 'px')
