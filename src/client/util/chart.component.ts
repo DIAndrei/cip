@@ -13,7 +13,8 @@ import { ChartDirective } from './chart.directive'
     moduleId: module.id,
     entryComponents: [BarChartComponent, LineChartComponent, PieChartComponent],
     selector: 'charts',
-    templateUrl: 'chart.html'
+    templateUrl: './chart.html',
+    styleUrls: ['chart.component.css']
 })
 export class ChartComponent {
     public ChartEnum = ChartType;
