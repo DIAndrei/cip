@@ -22,6 +22,30 @@ export class DataController {
             }
         ).exec() as IChartData[];
     }
+    async getLineData(report): Promise<IChartData[]> {
+        return await Data.aggregate([
+            { $match: report },
+            {
+                $group: {
+                    _id: {
+                        date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+                        prop: "$prop"
+                    },
+                    value: {
+                        $sum: "$value"
+                    }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: "$_id.date",
+                    prop: "$_id.prop",
+                    value: 1
+                }
+            }
+        ]).sort({ 'date': 1 }).exec() as IChartData[];
+    }
     async postData(newData: IChartData): Promise<void> {
         let data = new Data(newData);
         await data.save();

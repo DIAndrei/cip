@@ -45,7 +45,7 @@ router.get('/api/data/line', async (req: express.Request, res: express.Response)
         report: req.query.report
     }
     try {
-        let data = await dataCtrl.getData(query);
+        let data = await dataCtrl.getLineData(query);
         res.json(data);
     } catch (err) {
         res.status(500).end();
