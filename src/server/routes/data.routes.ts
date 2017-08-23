@@ -21,25 +21,6 @@ router.get('/api/data/bar', async (req: express.Request, res: express.Response):
     }
 });
 
-router.post('/api/data/bar', async (req: express.Request, res: express.Response): Promise<void> => {
-    let name: string = req.query.name;
-    let num: number = req.query.num;
-    let report: string = req.query.report;
-    for (let i = 0; i < num; i++) {
-        try {
-            await dataCtrl.postData({
-                prop: name,
-                date: new Date(),
-                value: util.randomNumber(100, i),
-                report: report || 'default'
-            });
-            res.end();
-        } catch (err) {
-            res.status(500).end();
-        }
-    }
-});
-
 router.get('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
     let query: IDataParams = {
         report: req.query.report
@@ -52,7 +33,7 @@ router.get('/api/data/line', async (req: express.Request, res: express.Response)
     }
 });
 
-router.post('/api/data/line', async (req: express.Request, res: express.Response): Promise<void> => {
+router.post('/api/data', async (req: express.Request, res: express.Response): Promise<void> => {
     let name: string = req.query.name;
     let num: number = req.query.num;
     let report: string = req.query.report;
