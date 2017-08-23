@@ -15,7 +15,7 @@ export class ChartService {
     }
 
     getLineData(): Observable<IChartData[]> {
-        return this._http.get(`${this.url}line`).map(res => res.json());
+        return this._http.get(`${this.url}line?report=installs`).map(res => res.json());
     }
 
 }
