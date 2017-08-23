@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
-// import { ChartComponent } from './util/chart.component';
-import { ChartService } from './util/chart.service';
-import { ChartComponent } from './util/chart.component';
-import { ChartDirective } from './util/chart.directive';
+import { ChartService } from './util/chart/chart.service';
+import { ChartComponent } from './util/chart/chart.component';
+import { ChartDirective } from './util/chart/chart.directive';
 import { LineChartComponent } from './lineChart/lineChart.component';
 import { PieChartComponent } from './pieChart/pieChart.component';
 import { BarChartComponent } from './barChart/barChart.component';
