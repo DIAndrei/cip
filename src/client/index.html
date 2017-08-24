@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <base href="/">
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Polyfills -->
-    <script src="core-js/client/shim.min.js"></script>
+<head>
+  <base href="/">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="zone.js/dist/zone.js"></script>
-    <script src="systemjs/dist/system.src.js"></script>
+  <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
-    </script>
-  </head>
+  <!-- Polyfills -->
+  <script src="core-js/client/shim.min.js"></script>
 
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
+  <script src="zone.js/dist/zone.js"></script>
+  <script src="systemjs/dist/system.src.js"></script>
+
+  <script src="systemjs.config.js"></script>
+  <script>
+    System.import('main.js').catch(function (err) { console.error(err); });
+  </script>
+</head>
+
+<body>
+  <my-app>Loading...</my-app>
+
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <br><br><br>
+</body>
+
 </html>
