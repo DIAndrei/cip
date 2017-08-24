@@ -28,23 +28,21 @@ export class DataController {
             {
                 $group: {
                     _id: {
-                        date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
                         prop: "$prop"
                     },
-                    value: {
-                        $sum: "$value"
-                    }
+                    total: { $sum: "$value" },
+                    values: { $push: { date: { $dateToString: { format: "%Y-%m-%d", date: "$date" } }, sessions: "$value" } },
                 }
             },
             {
                 $project: {
                     _id: 0,
-                    date: "$_id.date",
                     prop: "$_id.prop",
-                    value: 1
+                    total: 1,
+                    values: 1
                 }
             }
-        ]).sort({ 'date': 1 }).exec() as IChartData[];
+        ]).exec() as IChartData[];
     }
     async postData(newData: IChartData): Promise<void> {
         let data = new Data(newData);
