@@ -114,8 +114,10 @@ export class LineChartComponent implements IChart {
       .enter()
       .append('circle')
       .attr('class', 'circle')
-      .style('fill', (d) => { return this.z(d.prop) })
-      .attr('r', 5)
+      .style('stroke', (d) => { return this.z(d.prop) })
+      .style('fill', '#fff')
+      .style('stroke-width', 3)
+      .attr('r', 4)
       .attr('cx', (d: any) => {
         return this.x(d.date);
       })
