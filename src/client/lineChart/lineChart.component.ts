@@ -9,8 +9,7 @@ import { IResponse } from './../../server/types/IResponse';
   styleUrls: ['lineChart.component.css']
 })
 export class LineChartComponent implements IChart {
-  private chartData;
-  private dates: any;
+  private dates: Date[];
   private margin = { top: 50, right: 50, bottom: 50, left: 50 };
   private width: number;
   private height: number;
@@ -22,10 +21,9 @@ export class LineChartComponent implements IChart {
   private line: d3.Line<[number, number]>;
   private parseTime = d3.timeParse('%Y-%m-%d');
   private tooltip: any;
-  private DATA: IResponse[];
+  private chartData: IResponse[];
 
   @ViewChild('canvas') canvas: ElementRef;
-
 
   public type = ChartType.Line;
 
@@ -44,113 +42,95 @@ export class LineChartComponent implements IChart {
   }
 
   private initData(data: IResponse[]) {
-    // this.DATA = data;
-    this.DATA = data.map((d) => {
+    this.chartData = data.map((d) => {
       return {
         prop: d.prop,
         values: d.values.map((c) => {
           return {
-            date: this.parseTime(c.date),
-            sessions: c.sessions
+            date: this.parseTime(c.date as any),
+            sessions: +c.sessions,
+            prop: d.prop
           }
         })
       };
     });
-    // console.log(this.DATA)
-    this.chartData = data.map((v) => v.values.map((v) => this.parseTime(v.date)))[0];
+    this.dates = data.map((v) => v.values.map((v) => this.parseTime(v.date as any)))[0];
 
-    // console.log(this.chartData);
     this.initChart();
     this.drawAxis();
     this.drawLine();
   }
 
   private initChart() {
-    // this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
-    // console.log(this.chartData);
+    this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
     this.svg = d3.select(this.canvas.nativeElement);
-
-    this.width = this.svg.attr("width") - this.margin.left - this.margin.right;
-    this.height = this.svg.attr("height") - this.margin.top - this.margin.bottom;
-
-    this.g = this.svg.append("g").attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
-
+    this.width = this.svg.attr('width') - this.margin.left - this.margin.right;
+    this.height = this.svg.attr('height') - this.margin.top - this.margin.bottom;
+    this.g = this.svg.append('g').attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
     this.x = d3.scaleTime().range([0, this.width]);
     this.y = d3.scaleLinear().range([this.height, 0]);
     this.z = d3.scaleOrdinal(d3.schemeCategory10);
-
     this.line = d3.line()
-      .curve(d3.curveBasis)
       .x((d: any) => this.x(d.date))
       .y((d: any) => this.y(d.sessions));
-
-    this.x.domain(d3.extent(this.chartData, (d: Date) => d));
-    // console.log(this.chartData);
+    this.x.domain(d3.extent(this.dates, (d: Date) => d));
     this.y.domain([
-      d3.min(this.DATA, (c) => { return d3.min(c.values, (d) => { return d.sessions; }); }),
-      d3.max(this.DATA, (c) => { return d3.max(c.values, (d) => { return d.sessions; }); })
+      d3.min(this.chartData, (c) => { return d3.min(c.values, (d) => { return d.sessions; }); }),
+      d3.max(this.chartData, (c) => { return d3.max(c.values, (d) => { return d.sessions; }); })
     ]);
 
-    this.z.domain(this.DATA.map(function (c) { return c.prop; }));
-
-    // this.svg = d3.select(this.canvas.nativeElement)
-    //   .append('g')
-    //   .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
-
+    this.z.domain(this.chartData.map((c) => { return c.prop; }));
   }
 
   private drawAxis() {
-    this.g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + this.height + ")")
+    this.g.append('g')
+      .attr('class', 'axis axis--x')
+      .attr('transform', 'translate(0,' + this.height + ')')
       .call(d3.axisBottom(this.x));
 
-    this.g.append("g")
-      .attr("class", "axis axis--y")
+    this.g.append('g')
+      .attr('class', 'axis axis--y')
       .call(d3.axisLeft(this.y))
-      .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("fill", "#000");
+      .append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 6)
+      .attr('dy', '0.71em')
+      .attr('fill', '#000');
   }
 
   private drawLine() {
-    let line = this.g.selectAll(".city")
-      .data(this.DATA)
-      .enter().append("g")
-      .attr("class", "city");
+    let line = this.g.selectAll('.line')
+      .data(this.chartData)
+      .enter().append('g')
+      .attr('class', (d) => d.prop);
 
-    line.append("path")
-      .attr("class", "line")
-      .attr("d", (d) => this.line(d.values))
-      .style("stroke", (d) => this.z(d.prop));
+    line.append('path')
+      .attr('class', 'line')
+      .attr('d', (d) => this.line(d.values))
+      .style('stroke', (d) => this.z(d.prop));
 
-    // line.append("text")
-    //   .datum(function(d) { return {id: d.prop, value: d.values[d.values.length - 1]}; })
-    //   .attr("transform", (d) => "translate(" + this.x(d.value.date) + "," + this.y(d.value.sessions) + ")" )
-    //   .attr("x", 3)
-    //   .attr("dy", "0.35em")
-    //   .style("font", "10px sans-serif")
-    //   .text(function(d) { return d.prop; });
-
-    // this.svg.selectAll('circle')
-    //   .data(this.chartData)
-    //   .enter()
-    //   .append('circle')
-    //   .attr('class', 'data-point')
-    //   .attr('cx', (d: any) => { return this.x(d.values.date) })
-    //   .attr('cy', (d: any) => { return this.y(d.values.sessions) })
-    //   .attr('r', 5)
-    //   .on('mousemove', (d) => {
-    //     this.tooltip
-    //       .style('left', d3.event.pageX - 50 + 'px')
-    //       .style('top', d3.event.pageY - 70 + 'px')
-    //       .style('display', 'inline-block')
-    //       .html((d.prop) + ': ' + (d.values.sessions));
-    //   })
-    //   .on('mouseout', (d) => {
-    //     this.tooltip.style('display', 'none');
-    //   });;
+    line.selectAll('.circle')
+      .data((d: any) => { return d.values })
+      .enter()
+      .append('circle')
+      .attr('class', 'circle')
+      .style('fill', (d) => { return this.z(d.prop) })
+      .attr('r', 5)
+      .attr('cx', (d: any) => {
+        return this.x(d.date);
+      })
+      .attr('cy', (d: any) => {
+        return this.y(d.sessions);
+      })
+      .on('mousemove', (d: any) => {
+        this.tooltip
+          .style('left', d3.event.pageX - 50 + 'px')
+          .style('top', d3.event.pageY - 70 + 'px')
+          .style('display', 'inline-block')
+          .html(((d.prop)) + ': ' + (d.sessions));
+      })
+      .on('mouseout', (d: any) => {
+        this.tooltip.style('display', 'none');
+      });
   }
 }

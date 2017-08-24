@@ -16,12 +16,5 @@
 
 :host >>> .line {
   fill: none;
-  stroke: steelblue;
   stroke-width: 1.5px;
-}
-
-:host >>> .data-point {
-  stroke: steelblue;
-  stroke-width: 2px;
-  fill: white
 }
