@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { DataModel as Data } from '../models/data';
 import { IChartData } from '../types/IChartData';
+import { IResponse } from '../types/IResponse';
 
 export class DataController {
     constructor() { }
-    async getData(report): Promise<IChartData[]> {
+    async getData(report): Promise<IResponse[]> {
         return await Data.aggregate(
             { $match: report },
             {
@@ -20,9 +21,9 @@ export class DataController {
                     value: 1
                 }
             }
-        ).exec() as IChartData[];
+        ).exec() as IResponse[];
     }
-    async getLineData(report): Promise<IChartData[]> {
+    async getLineData(report): Promise<IResponse[]> {
         return await Data.aggregate([
             { $match: report },
             {
@@ -42,7 +43,7 @@ export class DataController {
                     values: 1
                 }
             }
-        ]).exec() as IChartData[];
+        ]).exec() as IResponse[];
     }
     async postData(newData: IChartData): Promise<void> {
         let data = new Data(newData);
