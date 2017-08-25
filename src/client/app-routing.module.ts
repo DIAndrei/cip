@@ -10,9 +10,11 @@ import { LineChartComponent } from './lineChart/lineChart.component';
 import { PieChartComponent } from './pieChart/pieChart.component';
 import { BarChartComponent } from './barChart/barChart.component';
 import { VersionsComponent } from './reports/versions/versions.component';
+import {InstallsComponent } from './reports/installs/installs.component';
 
 const routes: Routes = [
-    { path: 'versions', component: VersionsComponent }
+    { path: 'versions', component: VersionsComponent },
+    { path: 'installs', component: InstallsComponent }
 ];
 
 @NgModule({
