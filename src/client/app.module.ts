@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SidebarComponent } from './util/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AppComponent } from './app.component';
     HttpModule,
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    SidebarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
