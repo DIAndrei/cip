@@ -1,4 +1,4 @@
-import { Component, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, Type } from '@angular/core';
+import { Component, Input, ViewChild, ComponentFactoryResolver, Type } from '@angular/core';
 import * as d3 from 'd3';
 import * as d3Shape from "d3-shape";
 import { ChartService } from './chart.service';
