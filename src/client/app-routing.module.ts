@@ -26,6 +26,7 @@ const routes: Routes = [
     ],
     declarations: [
         VersionsComponent,
+        InstallsComponent,
         ChartComponent,
         ChartDirective,
         LineChartComponent,
@@ -38,6 +39,7 @@ const routes: Routes = [
     exports: [
         RouterModule,
         VersionsComponent,
+        InstallsComponent,
         ChartComponent
     ],
     entryComponents: [LineChartComponent, PieChartComponent, BarChartComponent]
