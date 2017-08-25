@@ -12,5 +12,6 @@ import { Router } from '@angular/router';
 export class InstallsComponent {
     constructor(){}
     private report: string = 'installs';
+    private title: string = "Installs"
 
 }
