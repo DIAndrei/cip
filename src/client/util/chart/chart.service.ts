@@ -13,13 +13,4 @@ export class ChartService {
     getData(query: string): Observable<IChartData[]> {
         return this._http.get(`${this.url}${query}`).map(res => res.json());
     }
-
-    getBarData(): Observable<IChartData[]> {
-        return this._http.get(`${this.url}bar?report=versions`).map(res => res.json());
-    }
-
-    getLineData(): Observable<IChartData[]> {
-        return this._http.get(`${this.url}line?report=installs`).map(res => res.json());
-    }
-
 }
