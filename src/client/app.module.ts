@@ -8,16 +8,15 @@ import { ChartDirective } from './util/chart/chart.directive';
 import { LineChartComponent } from './lineChart/lineChart.component';
 import { PieChartComponent } from './pieChart/pieChart.component';
 import { BarChartComponent } from './barChart/barChart.component';
-
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    // AppRoutingModule,
+    AppRoutingModule,
     HttpModule,
   ],
   declarations: [
