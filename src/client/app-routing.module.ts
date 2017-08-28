@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
 import { HttpWrap } from './util/http-wrap.service';
 import { SessionService } from './util/session.service';
+import { AuthGuard } from './util/guard.service';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -15,6 +16,7 @@ import { VersionsComponent } from './reports/versions/versions.component';
 import { InstallsComponent } from './reports/installs/installs.component';
 
 const routes: Routes = [
+    //  { path: 'versions', component: VersionsComponent, canActivate: [AuthGuard] },
     { path: 'versions', component: VersionsComponent },
     { path: 'installs', component: InstallsComponent }
 ];
@@ -38,7 +40,8 @@ const routes: Routes = [
     providers: [
         ChartService,
         HttpWrap,
-        SessionService
+        SessionService,
+        AuthGuard
     ],
     exports: [
         RouterModule,
