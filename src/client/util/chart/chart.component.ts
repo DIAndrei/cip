@@ -18,10 +18,10 @@ import { ChartDirective } from './chart.directive'
 })
 export class ChartComponent {
     @Input() name: string;
+    @Input('defaultType') chartType: ChartType = ChartType.Line;
     @ViewChild(ChartDirective) chartHost: ChartDirective;
 
     private chart: IChart;
-    private chartType: ChartType = ChartType.Line;
 
     protected data;
     public ChartEnum = ChartType;
