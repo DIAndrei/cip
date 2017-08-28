@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
+import { HttpWrap } from './util/http-wrap.service';
+import { SessionService } from './util/session.service';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -10,7 +12,7 @@ import { LineChartComponent } from './lineChart/lineChart.component';
 import { PieChartComponent } from './pieChart/pieChart.component';
 import { BarChartComponent } from './barChart/barChart.component';
 import { VersionsComponent } from './reports/versions/versions.component';
-import {InstallsComponent } from './reports/installs/installs.component';
+import { InstallsComponent } from './reports/installs/installs.component';
 
 const routes: Routes = [
     { path: 'versions', component: VersionsComponent },
@@ -34,7 +36,9 @@ const routes: Routes = [
         BarChartComponent
     ],
     providers: [
-        ChartService
+        ChartService,
+        HttpWrap,
+        SessionService
     ],
     exports: [
         RouterModule,
