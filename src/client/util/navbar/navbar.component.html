@@ -1,0 +1,24 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>            
+            <a href="" class="navbar-brand" [routerLink]="['/']" data-toggle="collapse" data-target=".navbar-collapse.in">Analytics</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul *ngIf="isLogged()" class="nav navbar-nav navbar-right">
+                <li><button class="btn navbar-btn btn-link" (click)="clickLogout()" data-toggle="collapse" data-target=".navbar-collapse.in">Logout</button></li>&nbsp;
+                <li><button class="btn navbar-btn btn-link" [routerLink]="['/user', getUser()]" data-toggle="collapse" data-target=".navbar-collapse.in">Hello, {{getUser()}}</button></li>&nbsp;
+            </ul>
+            <ul *ngIf="!isLogged()" class="nav navbar-nav navbar-right">
+                <li><button class="btn navbar-btn btn-link" [routerLink]="['/login']" data-toggle="collapse" data-target=".navbar-collapse.in">Login</button></li>&nbsp;
+                <li><button class="btn navbar-btn btn-success" [routerLink]="['/register']" data-toggle="collapse" data-target=".navbar-collapse.in">Register</button></li>&nbsp;
+            </ul>
+        </div>
+    </div>
+</nav>
