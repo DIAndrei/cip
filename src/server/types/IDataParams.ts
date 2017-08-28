@@ -1,3 +1,4 @@
 export interface IDataParams {
-    report: string
+    report: string,
+    owner: string
 }

@@ -21,6 +21,10 @@ const DataSchema = new Schema({
     report: {
         type: String,
         required: true
+    },
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 });
 

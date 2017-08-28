@@ -2,5 +2,6 @@ export interface IChartData {
     prop: string,
     date: Date,
     value: number,
-    report: string
+    report: string,
+    owner: string
 }
