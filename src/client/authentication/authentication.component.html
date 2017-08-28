@@ -1,0 +1,18 @@
+<div id="wrap">
+    <div id="regbar">  
+        <div class="authentication">
+        <div>
+
+
+
+            <label> Username </label> <input #username/>
+         
+            <label> Password </label> <input type="password" #password/>
+    
+            <button (click)="login(username.value, password.value);">
+                Login
+            </button>
+        </div>
+        </div>
+    </div>
+    </div>

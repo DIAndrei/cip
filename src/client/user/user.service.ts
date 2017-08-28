@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { HttpWrap } from '../util/http-wrap.service'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-// import { IUser } from './IUser';
+import { IUser } from './IUser';
 import { SessionService } from '../util/session.service';
 
 @Injectable()
@@ -24,9 +24,9 @@ export class UserService {
         return this._http.post(`${this.userRoute}auth`, credentials);
     }
 
-    // getUser(username: string): Observable<IUser> {
-    //     return this._http.get(`${this.userRoute}${username}`).map(res => res.json());
-    // }
+    getUser(username: string): Observable<IUser> {
+        return this._http.get(`${this.userRoute}${username}`).map(res => res.json());
+    }
 
     editUser(username: string, editedUser: Object): Observable<any> {
         return this._httpAuth.put(`${this.userRoute}${username}`, editedUser);
