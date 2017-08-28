@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import { AuthService } from '../auth.service';
+import { AuthenticationService } from '../../authentication/authentication.service';
 import { SessionService } from '../session.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SessionService } from '../session.service';
 })
 export class NavbarComponent {
     constructor(
-        // private _authService: AuthService,
+        private _authService: AuthenticationService,
         private _sessionService: SessionService
     ) { }
 
