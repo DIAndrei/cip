@@ -14,7 +14,7 @@ gulp.task('compile', () => {
             .pipe(sourcemaps.init())
             .pipe(tsProject());
 
-    return tsResult.pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '../src' }))
+    return tsResult.pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: '.' }))
         .pipe(gulp.dest('./build'));
 });
 
