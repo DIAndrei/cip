@@ -23,14 +23,14 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { NavbarComponent } from './util/navbar/navbar.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileService } from './user/profile/profile.service';
+import { UserPasswordComponent } from './user/profile/user-pass.component';
 
 const routes: Routes = [
-    //  { path: 'versions', component: VersionsComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: AuthenticationComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'versions', component: VersionsComponent, canActivate: [AuthGuard] },
     { path: 'installs', component: InstallsComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: AuthenticationComponent},
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
 
@@ -55,7 +55,8 @@ const routes: Routes = [
         PieChartComponent,
         BarChartComponent,
         SidebarComponent,
-        ProfileComponent
+        ProfileComponent,
+        UserPasswordComponent
     ],
     providers: [
         ChartService,

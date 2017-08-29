@@ -28,7 +28,7 @@ export class UserService {
         return this._http.get(`${this.userRoute}${username}`).map(res => res.json());
     }
 
-    editUser(username: string, editedUser: Object): Observable<any> {
-        return this._httpAuth.put(`${this.userRoute}${username}`, editedUser);
+    changePass(editedUser: Object): Observable<any> {
+        return this._httpAuth.put(`${this.userRoute}password`, editedUser);
     }
 }
