@@ -1,12 +1,12 @@
 import { Component, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpWrap } from '../http-wrap.service';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map';
 import { IChartData } from '../../../server/types/IChartData';
 
 @Injectable()
 export class ChartService {
-    constructor(private _http: Http) { }
+    constructor(private _http: HttpWrap) { }
 
     private url = '/api/data/';
 
