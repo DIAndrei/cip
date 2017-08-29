@@ -27,6 +27,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'versions', component: VersionsComponent },
     { path: 'installs', component: InstallsComponent },
+    { path: 'login', component: AuthenticationComponent},
     { path: '**', redirectTo: '' }
 ];
 
@@ -66,7 +67,8 @@ const routes: Routes = [
         InstallsComponent,
         ChartComponent,
         NavbarComponent,
-        SidebarComponent
+        SidebarComponent,
+        AuthenticationComponent
     ],
     entryComponents: [LineChartComponent, PieChartComponent, BarChartComponent]
 })
