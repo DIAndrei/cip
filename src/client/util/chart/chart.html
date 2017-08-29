@@ -1,20 +1,18 @@
-<div>
-    <div class="row">
-        <div class="col-md-3">
-            <sidebar></sidebar>
-        </div>
-        <div class="col-md-9">
-            <div class="row">
-                <div class="btn-group">
-                    <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Bar)">Bar Chart</button>
-                    <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Line)">Line Chart</button>
-                    <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Pie)">Pie Chart</button>
-                </div>
+<div class="row">
+    <div class="col-md-3">
+        <sidebar></sidebar>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="btn-group">
+                <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Bar)">Bar Chart</button>
+                <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Line)">Line Chart</button>
+                <button class="btn btn-default btn-xs" (click)="loadComponent(ChartEnum.Pie)">Pie Chart</button>
             </div>
-            <div class="row">
-                <div class="container-fluid">
-                    <ng-template chart-host></ng-template>
-                </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <ng-template chart-host></ng-template>
             </div>
         </div>
     </div>
