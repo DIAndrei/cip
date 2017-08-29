@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
     templateUrl: './sidebar.component.html',
     styleUrls: ['sidebar.component.css']
 })
-export class SidebarComponent {
-    private title: string = 'Analytics';
+export class SidebarComponent {    
     private reports: Object[] = [
         {
             title: 'Installs',
