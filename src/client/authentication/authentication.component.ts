@@ -37,7 +37,7 @@ export class AuthenticationComponent implements OnInit {
   authenticate() {
     this.authenticationService.authenticate(this.loginForm.value).subscribe(
       res => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/installs']);
       },
       err => {
         console.error(err);
