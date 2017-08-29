@@ -14,7 +14,7 @@ export class AuthenticationService {
         private sessionService: SessionService
     ) { }
 
-    authenticate(usernamePassword: Object){
+    authenticate(usernamePassword: Object) {
         return this.userService.authenticate(usernamePassword).map(res => res.json()).map(
             res => {
                 let token = res.token;
