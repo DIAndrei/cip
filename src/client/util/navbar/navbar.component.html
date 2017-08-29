@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div>
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
                 aria-controls="navbar">
@@ -8,16 +8,18 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="" class="navbar-brand" [routerLink]="['/']" data-toggle="collapse" data-target=".navbar-collapse.in">Analytics</a>
+            <a href="" class="navbar-brand" [routerLink]="['/']">Analytics</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul *ngIf="isLogged()" class="nav navbar-nav navbar-right">
                 <li><button class="btn navbar-btn btn-link" (click)="clickLogout()" data-toggle="collapse" data-target=".navbar-collapse.in">Logout</button></li>&nbsp;
-                <li><p class="navbar-text">{{getUser()}}</p></li>&nbsp;
+                <li>
+                    <p class="navbar-text">{{getUser()}}</p>
+                </li>&nbsp;
             </ul>
             <ul *ngIf="!isLogged()" class="nav navbar-nav navbar-right">
                 <li><button class="btn navbar-btn btn-link" [routerLink]="['/login']" data-toggle="collapse" data-target=".navbar-collapse.in">Login</button></li>&nbsp;
-                <li><button class="btn navbar-btn btn-success" [routerLink]="['/register']" data-toggle="collapse" data-target=".navbar-collapse.in">Register</button></li>&nbsp;
+                <li><button class="btn navbar-btn btn-link" [routerLink]="['/register']" data-toggle="collapse" data-target=".navbar-collapse.in">Sign Up</button></li>&nbsp;
             </ul>
         </div>
     </div>
