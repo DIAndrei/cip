@@ -24,7 +24,7 @@ export class AuthenticationService {
         );
     }
 
-    logOut() {
+    logout() {
         this.sessionService.resetSession();
         this.router.navigate(['/login']);
     }

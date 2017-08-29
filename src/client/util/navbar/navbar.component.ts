@@ -21,7 +21,7 @@ export class NavbarComponent {
         return this._sessionService.isLoggedIn();
     }
 
-    // clickLogout(): void {
-    //     this._authService.logout();
-    // }
+    clickLogout(): void {
+        this._authService.logout();
+    }
 }
