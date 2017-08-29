@@ -57,6 +57,8 @@ export class PieChartComponent implements IChart {
   }
 
   private drawPie(data: IChartData[]) {
+    var total= d3.sum(data, function(d){return d.value;});
+    console.log(total);
     let g = this.svg.selectAll('.arc')
       .data(this.pie(data))
       .enter().append('g')
@@ -66,7 +68,7 @@ export class PieChartComponent implements IChart {
           .style('left', d3.event.pageX - 50 + 'px')
           .style('top', d3.event.pageY - 70 + 'px')
           .style('display', 'inline-block')
-          .html((d.data.prop) + ': ' + (d.data.value));
+          .html((d.data.prop) + ': ' + d3.format(".2f")(100 * d.data.value / total) + "%");
       })
       .on('mouseout', (d) => {
         this.tooltip.style('display', 'none');
@@ -75,6 +77,6 @@ export class PieChartComponent implements IChart {
       .style('fill', (d: any) => this.color(d.data.prop));
     g.append('text').attr('transform', (d: any) => 'translate(' + this.labelArc.centroid(d) + ')')
       .attr('dy', '.35em')
-      .text((d: any) => d.data.prop);
+      .text((d: any) => d.data.prop + " "+ d3.format(".2f")(100 * d.data.value / total) + "%");
   }
 }
