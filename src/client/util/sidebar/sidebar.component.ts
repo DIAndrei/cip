@@ -10,11 +10,11 @@ export class SidebarComponent {
     private reports: Object[] = [
         {
             title: 'Installs',
-            link: 'installs'
+            link: '/installs'
         },
         {
             title: 'Versions',
-            link: 'versions'
+            link: '/versions'
         }
     ];
 }
