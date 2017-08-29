@@ -12,14 +12,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul *ngIf="isLogged()" class="nav navbar-nav navbar-right">
-                <li><button class="btn navbar-btn btn-link" (click)="clickLogout()" data-toggle="collapse" data-target=".navbar-collapse.in">Logout</button></li>&nbsp;
-<<<<<<< HEAD
-                <li><button class="btn navbar-btn btn-link" [routerLink]="['/profile']" data-toggle="collapse" data-target=".navbar-collapse.in">{{getUser()}}</button></li>&nbsp;
-=======
-                <li>
-                    <p class="navbar-text">{{getUser()}}</p>
-                </li>&nbsp;
->>>>>>> f69bbfd8b91b02f4dfeaab4d5793834ec300c115
+                <li><button class="btn navbar-btn btn-link" (click)="clickLogout()">Logout</button></li>&nbsp;
+                <li><button class="btn navbar-btn btn-link" [routerLink]="['/profile']">{{getUser()}}</button></li>&nbsp;
             </ul>
             <ul *ngIf="!isLogged()" class="nav navbar-nav navbar-right">
                 <li><button class="btn navbar-btn btn-link" [routerLink]="['/login']" data-toggle="collapse" data-target=".navbar-collapse.in">Login</button></li>&nbsp;

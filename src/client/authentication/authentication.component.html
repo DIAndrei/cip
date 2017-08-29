@@ -1,21 +1,30 @@
-<div class="col-md-5 col-md-offset-5">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success btn-block" type="submit" [disabled]="!loginForm.valid">Login </button>
-                        <button type="button" class="btn btn-link btn-block" [routerLink]="['/register']">Click here to register</button>
-                    </div>
-                </form>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1 text-center">
+            <a href="" [routerLink]="['/']">
+        <img src="https://installeranalytics.com/app/apple-touch-icon-152x152.png" alt="Installer Analytics">
+      </a>
+            <br>
+            <a href="" [routerLink]="['/']" class="btn btn-link">
+        Learn more
+      </a>
+        </div>
+        <div class="col-md-7">
+            <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-warning" type="submit" [disabled]="!loginForm.valid">Login </button>
+                </div>
+            </form>
+            <hr>
+            <p>Don't have an account? <a href="" [routerLink]="['/register']">Sign Up</a> to start your two month free trial.</p>
         </div>
     </div>
-    
+</div>

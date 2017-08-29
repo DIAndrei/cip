@@ -1,20 +1,24 @@
-<div class="col-md-5 col-md-offset-5">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <form [formGroup]="registerForm" (ngSubmit)="register()">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-success btn-block" type="submit" [disabled]="!registerForm.valid">Register</button>
-                    <button type="button" class="btn btn-link btn-block" [routerLink]="['/login']">Click here to login</button>
-                </div>
-            </form>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <h1>Sign Up</h1>
+        <hr>
+        <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-warning btn-lg" type="submit" [disabled]="!registerForm.valid">Start my two month free trial</button>
+            </div>
+        </form>
+        <hr>
+        <p>Already have an account? <a href="" [routerLink]="['/login']">Login</a></p>
+        <div class="well">
+            <small>Your free trial will last for 60 days. At the end of your trial you can sign up for a paid plan if you wish to continue using your Installer Analytics account.  You may cancel at any time. By signing up, you agree to the <a href="http://www.advancedinstaller.com/analytics/privacy-policy.html">Privacy Policy</a> and <a href="http://www.advancedinstaller.com/analytics/eula.html">Terms of Service</a>.</small>
         </div>
     </div>
 </div>
