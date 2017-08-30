@@ -28,4 +28,4 @@ const DataSchema = new Schema({
     }
 });
 
-export var DataModel = mongoose.model<DataDocument>('Data', DataSchema);
+export let DataModel = mongoose.model<DataDocument>('Data', DataSchema);
