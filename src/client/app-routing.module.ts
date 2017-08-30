@@ -24,12 +24,14 @@ import { NavbarComponent } from './util/navbar/navbar.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileService } from './user/profile/profile.service';
 import { UserPasswordComponent } from './user/profile/user-pass.component';
+import { EnvironmentComponent } from './reports/environment/environment.component';
 
 const routes: Routes = [
     { path: 'login', component: AuthenticationComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'versions', component: VersionsComponent, canActivate: [AuthGuard] },
     { path: 'installs', component: InstallsComponent, canActivate: [AuthGuard] },
+    { path: 'environment', component: EnvironmentComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
     { path: '**', redirectTo: '' }
 ];
@@ -49,6 +51,7 @@ const routes: Routes = [
         NavbarComponent,
         VersionsComponent,
         InstallsComponent,
+        EnvironmentComponent,
         ChartComponent,
         ChartDirective,
         LineChartComponent,

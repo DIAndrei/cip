@@ -15,6 +15,10 @@ export class SidebarComponent {
         {
             title: 'Versions',
             link: '/versions'
+        },
+        {
+            title: 'Environment',
+            link: '/environment'
         }
     ];
 }
