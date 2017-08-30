@@ -11,7 +11,7 @@ const app = express();
 (<any>mongoose).Promise = global.Promise;
 (async () => {
     try {
-        await mongoose.connect(CONFIG.DB);
+        await mongoose.connect(CONFIG.DB, { useMongoClient: true });
     } catch (err) {
         console.trace(err);
     }
