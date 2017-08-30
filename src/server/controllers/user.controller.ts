@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { UserModel as User, UserDocument } from '../models/user';
 import { IUserParams } from '../types/IUserParams';
 import { IUser } from '../types/IUser';

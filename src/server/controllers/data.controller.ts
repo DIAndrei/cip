@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import * as mongoose from 'mongoose';
 import { DataModel as Data } from '../models/data';
 import { IChartData } from '../types/IChartData';
