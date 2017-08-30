@@ -5,7 +5,7 @@ import { IResponse } from './../../server/types/IResponse';
 
 @Component({
   moduleId: module.id,
-  template: '<svg #canvas width="900" height="500"></svg>',
+  template: '<svg #canvas width="960" height="600"></svg>',
   styleUrls: ['lineChart.component.css']
 })
 export class LineChartComponent implements IChart {
@@ -93,12 +93,17 @@ export class LineChartComponent implements IChart {
       .call(d3.axisLeft(this.y))
       .append('text')
       .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
+      .attr('y', 3)
       .attr('dy', '0.71em')
       .attr('fill', '#000');
   }
 
   private drawLine() {
+
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+    var legendRectSize = 18;
+    var legendSpacing = 4;
+
     let line = this.g.selectAll('.line')
       .data(this.chartData)
       .enter().append('g')
@@ -134,5 +139,36 @@ export class LineChartComponent implements IChart {
       .on('mouseout', (d: any) => {
         this.tooltip.style('display', 'none');
       });
+
+    var legendDotSize = 30;
+    var legendWrapper = this.svg.append("g")
+      .attr("class", "legend")
+      .attr("transform", function (d) { return "translate(200,550)"; })
+
+    var legendText = legendWrapper.selectAll("text")
+      .data(this.chartData);
+
+    legendText.enter().append("text")
+      .attr("y", function (d, i) { return i * legendDotSize + 12; })
+      .attr("x", 20)
+      .merge(legendText)
+      .text(function (d) {
+        return d.prop;
+      });
+
+    legendText.exit().remove();
+
+    var legendDot = legendWrapper.selectAll("rect")
+      .data(this.chartData)
+      .enter().append("rect")
+      .attr("y", function (d, i) { return i * legendDotSize; })
+      .attr("rx", legendDotSize * 0.5)
+      .attr("ry", legendDotSize * 0.5)
+      .attr("width", legendDotSize * 0.5)
+      .attr("height", legendDotSize * 0.5)
+      .style("fill", (d)  => { return this.z(d.prop) });
+
+    legendDot.exit().remove();
+
   }
 }
