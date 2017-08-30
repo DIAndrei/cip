@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row">
+<div class="row">
+    <div class="container">
         <div class="col-md-3 col-md-offset-1 text-center">
             <a href="" [routerLink]="['/']">
         <img src="https://installeranalytics.com/app/apple-touch-icon-152x152.png" alt="Installer Analytics">
@@ -20,7 +20,14 @@
                     <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-warning" type="submit" [disabled]="!loginForm.valid">Login </button>
+                    <div class="row">
+                        <span class="pull-right">
+                            <a href="" class="btn btn-lg btn-link" [routerLink]="['/forgot']"><small>Forgot password?</small></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-warning btn-lg" type="submit" [disabled]="!loginForm.valid">Login </button>
                 </div>
             </form>
             <hr>

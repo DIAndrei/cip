@@ -25,10 +25,13 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { ProfileService } from './user/profile/profile.service';
 import { UserPasswordComponent } from './user/profile/user-pass.component';
 import { EnvironmentComponent } from './reports/environment/environment.component';
+import { ForgotPasswordComponent } from './forgotPassword/forgot.component';
+import { ForgotService } from './forgotPassword/forgot.service';
 
 const routes: Routes = [
     { path: 'login', component: AuthenticationComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'forgot', component: ForgotPasswordComponent },
     { path: 'versions', component: VersionsComponent, canActivate: [AuthGuard] },
     { path: 'installs', component: InstallsComponent, canActivate: [AuthGuard] },
     { path: 'environment', component: EnvironmentComponent, canActivate: [AuthGuard] },
@@ -48,6 +51,7 @@ const routes: Routes = [
     declarations: [
         AuthenticationComponent,
         RegisterComponent,
+        ForgotPasswordComponent,
         NavbarComponent,
         VersionsComponent,
         InstallsComponent,
@@ -68,6 +72,7 @@ const routes: Routes = [
         AuthenticationService,
         ProfileService,
         UserService,
+        ForgotService,
         AuthGuard
     ],
     exports: [
