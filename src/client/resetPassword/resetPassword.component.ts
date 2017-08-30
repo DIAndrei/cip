@@ -23,10 +23,8 @@ export class ResetPasswordComponent {
 
     constructor(
         private formBuilder: FormBuilder,
-        private userService: UserService,
         private router: Router,
         private route: ActivatedRoute,
-        private sessionService: SessionService,
         private resetPasswordService: ResetPasswordService
     ) { }
 
@@ -40,14 +38,16 @@ export class ResetPasswordComponent {
     resetPassword() {
         this.route.params.subscribe(
             params => {
-                let user = this.passForm.value;
+                let user = {
+                    password: this.passForm.value.newPassword
+                };
                 this.resetPasswordService.postReset(user, params['token']).subscribe(
-                res => {
-                    console.log(res._body);
-                },
-                err => {
-                    console.error(err._body);
-                })
+                    res => {
+                        this.router.navigate(['/login']);
+                    },
+                    err => {
+                        console.error(err._body);
+                    })
             },
             err => {
                 console.error(err);
