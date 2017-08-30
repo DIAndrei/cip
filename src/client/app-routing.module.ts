@@ -27,6 +27,8 @@ import { UserPasswordComponent } from './user/profile/user-pass.component';
 import { EnvironmentComponent } from './reports/environment/environment.component';
 import { ForgotPasswordComponent } from './forgotPassword/forgot.component';
 import { ForgotService } from './forgotPassword/forgot.service';
+import { ResetPasswordComponent } from './resetPassword/resetPassword.component';
+import { ResetPasswordService } from './resetPassword/resetPassword.service';
 
 const routes: Routes = [
     { path: 'login', component: AuthenticationComponent },
@@ -36,6 +38,7 @@ const routes: Routes = [
     { path: 'installs', component: InstallsComponent, canActivate: [AuthGuard] },
     { path: 'environment', component: EnvironmentComponent, canActivate: [AuthGuard] },
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'reset/:token', component: ResetPasswordComponent },
     { path: '**', redirectTo: '' }
 ];
 
@@ -63,7 +66,8 @@ const routes: Routes = [
         BarChartComponent,
         SidebarComponent,
         ProfileComponent,
-        UserPasswordComponent
+        UserPasswordComponent, 
+        ResetPasswordComponent
     ],
     providers: [
         ChartService,
@@ -73,6 +77,7 @@ const routes: Routes = [
         ProfileService,
         UserService,
         ForgotService,
+        ResetPasswordService,
         AuthGuard
     ],
     exports: [
