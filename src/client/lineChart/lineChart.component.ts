@@ -6,8 +6,8 @@ import { IResponse } from './../../server/types/IResponse';
 @Component({
   moduleId: module.id,
   template: `
-    <svg #canvas width="960" height="600"></svg>
-    <svg #legend width="960" height="50"></svg>
+    <svg #canvas width="900" height="500"></svg>
+    <svg #legend width="900" height="50"></svg>
   `,
   styleUrls: ['lineChart.component.css']
 })
