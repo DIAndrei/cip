@@ -107,7 +107,7 @@ router.post('/api/users/reset/:token', async (req: express.Request, res: express
     try {
         let tokenParams = {
             _id: req.params.token
-        }
+        };
         let token = await resetCtrl.getToken(tokenParams);
         if (token) {
             let hash = await bcrypt.hash(req.body.password, 10);
@@ -125,6 +125,22 @@ router.post('/api/users/reset/:token', async (req: express.Request, res: express
             res.status(404).json({ message: 'No token found' });
         }
 
+    } catch (err) {
+        res.status(500).json({ message: 'Incorrect token provided.' });
+    }
+});
+
+router.get('/api/users/reset/:token', async (req: express.Request, res: express.Response): Promise<any> => {
+    try {
+        let params = {
+            _id: req.params.token
+        };
+        let token = await resetCtrl.getToken(params);
+        if (token) {
+            res.json({ message: 'Token OK' });
+        } else {
+            res.status(404).json({ message: 'No token found' });
+        }
     } catch (err) {
         res.status(500).json({ message: 'Incorrect token provided.' });
     }

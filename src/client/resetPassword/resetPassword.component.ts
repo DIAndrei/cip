@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { SessionService } from '../util/session.service';
@@ -13,7 +13,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
     templateUrl: './resetPassword.component.html'
 })
 
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
 
     private url = '/api/users/reset/:token';
     private passForm: FormGroup;
@@ -29,10 +29,28 @@ export class ResetPasswordComponent {
     ) { }
 
     ngOnInit() {
+        this.getToken();
         this.passForm = this.formBuilder.group({
             newPassword: this.newPassword,
             confirmPassword: this.confirmPassword
         });
+    }
+
+    getToken() {
+        this.route.params.subscribe(
+            params => {
+                this.resetPasswordService.getToken(params['token']).subscribe(
+                    res => {
+                        console.log(res._body);
+                    },
+                    err => {
+                        console.error(err._body);
+                        this.router.navigate(['/forgot']);
+                    });
+            },
+            err => {
+                console.error(err);
+            });
     }
 
     resetPassword() {
@@ -51,7 +69,7 @@ export class ResetPasswordComponent {
             },
             err => {
                 console.error(err);
-            })
+            });
     }
 
 }

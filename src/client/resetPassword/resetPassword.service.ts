@@ -11,8 +11,12 @@ export class ResetPasswordService {
         private _http: Http
     ) { }
 
-    postReset(user, token): Observable<any> {
-        return this._http.post(`${this.resetRoute}${token}` , user);
+    getToken(token: string): Observable<any> {
+        return this._http.get(`${this.resetRoute}${token}`);
+    }
+
+    postReset(user: Object, token: string): Observable<any> {
+        return this._http.post(`${this.resetRoute}${token}`, user);
     }
 
 }
