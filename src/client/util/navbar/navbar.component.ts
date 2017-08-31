@@ -5,7 +5,8 @@ import { SessionService } from '../session.service';
 @Component({
     moduleId: module.id,
     selector: 'app-nav',
-    templateUrl: './navbar.component.html'
+    templateUrl: './navbar.component.html',
+    styleUrls: ['navbar.css']
 })
 export class NavbarComponent {
     constructor(
