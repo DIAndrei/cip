@@ -5,7 +5,10 @@ import { IChartData } from './../../server/types/IChartData';
 
 @Component({
   moduleId: module.id,
-  template: '<svg #canvas width="900" height="500"></svg>',
+  template: `
+    <svg #canvas width="900" height="500"></svg>
+    <svg #legend width="900" height="50"></svg>
+  `,
   styleUrls: ['pieChart.component.css']
 })
 export class PieChartComponent implements IChart {
@@ -18,10 +21,13 @@ export class PieChartComponent implements IChart {
   private pie: any;
   private color: any;
   private svg: any;
+  private legendSvg: any;
   private tooltip: any;
-
   private chartData: IChartData[];
+
   @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('legend') legend: ElementRef;
+
   public type = ChartType.Pie;
 
   constructor(
@@ -42,6 +48,7 @@ export class PieChartComponent implements IChart {
 
   private initSvg() {
     this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
+    this.legendSvg = d3.select(this.legend.nativeElement);
     this.color = d3.scaleOrdinal(d3.schemeCategory10);
     this.arc = d3.arc()
       .outerRadius(this.radius - 10)
@@ -59,9 +66,9 @@ export class PieChartComponent implements IChart {
 
   private drawPie(data: IChartData[]) {
     this.chartData = data;
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
+    let color = d3.scaleOrdinal(d3.schemeCategory10);
     var total = d3.sum(data, (d) => { return d.value; });
-    console.log(total);
+
     let g = this.svg.selectAll('.arc')
       .data(this.pie(data))
       .enter().append('g')
@@ -82,35 +89,33 @@ export class PieChartComponent implements IChart {
       .attr('dy', '.35em')
       .text((d: any) => d.data.prop + ' ' + d3.format('.2f')(100 * d.data.value / total) + '%');
 
-      var legendDotSize = 30;
-      var legendWrapper = this.svg.append("g")
-        .attr("class", "legend")
-        .attr("transform", function (d) { return "translate(200,200)"; })
-  
-      var legendText = legendWrapper.selectAll("text")
-        .data(this.chartData);
-  
-      legendText.enter().append("text")
-        .attr("y", function (d, i) { return i * legendDotSize + 12; })
-        .attr("x", 20)
-        .merge(legendText)
-        .text(function (d) {
-          return d.prop;
-        });
-  
-      legendText.exit().remove();
-  
-      var legendDot = legendWrapper.selectAll("rect")
-        .data(this.chartData)
-        .enter().append("rect")
-        .attr("y", function (d, i) { return i * legendDotSize; })
-        .attr("rx", legendDotSize * 0.5)
-        .attr("ry", legendDotSize * 0.5)
-        .attr("width", legendDotSize * 0.5)
-        .attr("height", legendDotSize * 0.5)
-        .style("fill", (d)  => { return color(d.prop) });
-  
-      legendDot.exit().remove();
-  
+    let legendDotSize = 30;
+    let legendWrapper = this.legendSvg.append('g')
+      .attr('class', 'legend')
+      .attr('transform', (d) => { return 'translate(275, 5)'; })
+
+    let legendText = legendWrapper.selectAll('text')
+      .data(this.chartData);
+
+    legendText.enter().append('text')
+      .attr('x', (d, i) => { return i * (legendDotSize * 5); })
+      .attr('y', legendDotSize)
+      .merge(legendText)
+      .text((d) => {
+        return d.prop;
+      });
+
+    legendText.exit().remove();
+
+    let legendDot = legendWrapper.selectAll('rect')
+      .data(this.chartData)
+      .enter().append('rect')
+      .attr('x', (d, i) => { return i * (legendDotSize * 5); })
+      .attr('width', legendDotSize * 0.5)
+      .attr('height', legendDotSize * 0.5)
+      .style('fill', (d) => { return color(d.prop) });
+
+    legendDot.exit().remove();
+
   }
 }

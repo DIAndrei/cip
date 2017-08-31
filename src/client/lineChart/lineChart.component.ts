@@ -5,7 +5,10 @@ import { IResponse } from './../../server/types/IResponse';
 
 @Component({
   moduleId: module.id,
-  template: '<svg #canvas width="960" height="600"></svg>',
+  template: `
+    <svg #canvas width="960" height="600"></svg>
+    <svg #legend width="960" height="50"></svg>
+  `,
   styleUrls: ['lineChart.component.css']
 })
 export class LineChartComponent implements IChart {
@@ -18,12 +21,14 @@ export class LineChartComponent implements IChart {
   private z: any;
   private g: any;
   private svg: any;
+  private legendSvg: any;
   private line: d3.Line<[number, number]>;
   private parseTime = d3.timeParse('%Y-%m-%d');
   private tooltip: any;
   private chartData: IResponse[];
 
   @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('legend') legend: ElementRef;
 
   public type = ChartType.Line;
 
@@ -63,6 +68,7 @@ export class LineChartComponent implements IChart {
 
   private initChart() {
     this.tooltip = d3.select('ng-component').append('div').attr('class', 'tooltip');
+    this.legendSvg = d3.select(this.legend.nativeElement);
     this.svg = d3.select(this.canvas.nativeElement);
     this.width = this.svg.attr('width') - this.margin.left - this.margin.right;
     this.height = this.svg.attr('height') - this.margin.top - this.margin.bottom;
@@ -100,9 +106,9 @@ export class LineChartComponent implements IChart {
 
   private drawLine() {
 
-    var color = d3.scaleOrdinal(d3.schemeCategory20);
-    var legendRectSize = 18;
-    var legendSpacing = 4;
+    let color = d3.scaleOrdinal(d3.schemeCategory20);
+    let legendRectSize = 18;
+    let legendSpacing = 4;
 
     let line = this.g.selectAll('.line')
       .data(this.chartData)
@@ -140,33 +146,31 @@ export class LineChartComponent implements IChart {
         this.tooltip.style('display', 'none');
       });
 
-    var legendDotSize = 30;
-    var legendWrapper = this.svg.append("g")
-      .attr("class", "legend")
-      .attr("transform", function (d) { return "translate(200,550)"; })
+    let legendDotSize = 30;
+    let legendWrapper = this.legendSvg.append('g')
+      .attr('class', 'legend')
+      .attr('transform', (d) => { return 'translate(275, 5)'; })
 
-    var legendText = legendWrapper.selectAll("text")
+    let legendText = legendWrapper.selectAll('text')
       .data(this.chartData);
 
-    legendText.enter().append("text")
-      .attr("y", function (d, i) { return i * legendDotSize + 12; })
-      .attr("x", 20)
+    legendText.enter().append('text')
+      .attr('x', (d, i) => { return i * (legendDotSize * 5); })
+      .attr('y', legendDotSize)
       .merge(legendText)
-      .text(function (d) {
+      .text((d) => {
         return d.prop;
       });
 
     legendText.exit().remove();
 
-    var legendDot = legendWrapper.selectAll("rect")
+    let legendDot = legendWrapper.selectAll('rect')
       .data(this.chartData)
-      .enter().append("rect")
-      .attr("y", function (d, i) { return i * legendDotSize; })
-      .attr("rx", legendDotSize * 0.5)
-      .attr("ry", legendDotSize * 0.5)
-      .attr("width", legendDotSize * 0.5)
-      .attr("height", legendDotSize * 0.5)
-      .style("fill", (d)  => { return this.z(d.prop) });
+      .enter().append('rect')
+      .attr('x', (d, i) => { return i * (legendDotSize * 5); })
+      .attr('width', legendDotSize * 0.5)
+      .attr('height', legendDotSize * 0.5)
+      .style('fill', (d) => { return this.z(d.prop) });
 
     legendDot.exit().remove();
 
