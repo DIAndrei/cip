@@ -31,6 +31,7 @@ import { ResetPasswordComponent } from './resetPassword/resetPassword.component'
 import { ResetPasswordService } from './resetPassword/resetPassword.service';
 
 const routes: Routes = [
+    { path: '', component: InstallsComponent, canActivate: [AuthGuard] },
     { path: 'login', component: AuthenticationComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'forgot', component: ForgotPasswordComponent },
@@ -66,7 +67,7 @@ const routes: Routes = [
         BarChartComponent,
         SidebarComponent,
         ProfileComponent,
-        UserPasswordComponent, 
+        UserPasswordComponent,
         ResetPasswordComponent
     ],
     providers: [
