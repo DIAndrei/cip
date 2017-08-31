@@ -61,7 +61,7 @@ export class PieChartComponent implements IChart {
       .value((d: any) => d.value);
     this.svg = d3.select(this.canvas.nativeElement)
       .append('g')
-      .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');;
+      .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
   }
 
   private drawPie(data: IChartData[]) {
