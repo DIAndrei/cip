@@ -1,37 +1,35 @@
 <div class="row">
-    <div class="container">
-        <div class="col-md-3 col-md-offset-1 text-center">
-            <a href="" [routerLink]="['/']">
-        <img src="https://installeranalytics.com/app/apple-touch-icon-152x152.png" alt="Installer Analytics">
-      </a>
-            <br>
-            <a href="" [routerLink]="['/']" class="btn btn-link">
-        Learn more
-      </a>
-        </div>
-        <div class="col-md-7">
-            <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <span class="pull-right">
+    <br><br>
+    <div class="col-md-2 text-center">
+        <br>
+        <a href="" [routerLink]="['/']"><img src="https://installeranalytics.com/app/apple-touch-icon-152x152.png" alt="Installer Analytics"></a>
+        <br>
+        <a href="" [routerLink]="['/']" class="btn btn-link">Learn more</a>
+    </div>
+
+    <div class="col-md-6">
+        <form [formGroup]="loginForm" (ngSubmit)="authenticate()">
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" type="email" name="email" [formControl]="email" placeholder="email" required autofocus>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" [formControl]="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <span class="pull-right">
                             <a href="" class="btn btn-lg btn-link" [routerLink]="['/forgot']"><small>Forgot password?</small></a>
                         </span>
-                    </div>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-warning btn-lg" type="submit" [disabled]="!loginForm.valid">Login </button>
-                </div>
-            </form>
-            <hr>
-            <p>Don't have an account? <a href="" [routerLink]="['/register']">Sign Up</a> to start your two month free trial.</p>
-        </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-warning btn-lg" type="submit" [disabled]="!loginForm.valid">Login </button>
+            </div>
+        </form>
+        <hr>
+        <p>Don't have an account? <a href="" [routerLink]="['/register']">Sign Up</a> to start your two month free trial.</p>
     </div>
+
 </div>
