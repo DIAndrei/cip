@@ -47,7 +47,7 @@ router.put('/api/users/password', async (req: express.Request, res: express.Resp
             await userCtrl.verifyPassword(params);
             res.json({ message: 'Password changed.' });
         } catch (err) {
-            res.status(401).json({ message: 'Failed to authenticate token.' });
+            res.status(500).json({ message: 'Token authentication error.' });
         }
     }
 });
@@ -142,6 +142,6 @@ router.get('/api/users/reset/:token', async (req: express.Request, res: express.
             res.status(404).json({ message: 'No token found' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Incorrect token provided.' });
+        res.status(500).json({ message: 'Token authentication error.' });
     }
 });
